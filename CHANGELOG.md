@@ -1,0 +1,18 @@
+# Changelog
+
+All notable changes to this project are documented here.
+
+## Theme 1.0.58
+
+- Added coordinated Claude-inspired light and dark palettes.
+- Added bundled Anthropic Sans, Serif, and Mono typography with Style Settings selectors.
+- Refined window chrome, tabs, sidebars, explorer actions, metadata, code, tables, and status bar.
+- Added auto-hide status bar and Sync status visibility settings.
+- Added modal backdrop blur and prompt layout styling.
+
+## Claude Theme Companion 1.0.0
+
+- Added repeatable modal and context-menu closing animations.
+- Added smooth quick-switcher, command-palette, and settings-search result transitions.
+- Added click-through status-bar activation geometry.
+- Added live-preview heading marker entrance and exit animation.

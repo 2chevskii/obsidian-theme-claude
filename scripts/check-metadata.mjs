@@ -1,0 +1,84 @@
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import process from "node:process";
+
+const root = resolve(import.meta.dirname, "..");
+const readJson = (path) => JSON.parse(readFileSync(resolve(root, path), "utf8"));
+const failures = [];
+
+const themeManifest = readJson("manifest.json");
+const themeVersions = readJson("versions.json");
+const rootPackage = readJson("package.json");
+const pluginManifest = readJson("companion/manifest.json");
+const pluginVersions = readJson("companion/versions.json");
+const pluginPackage = readJson("companion/package.json");
+const themeCss = readFileSync(resolve(root, "theme.css"), "utf8");
+const readme = readFileSync(resolve(root, "README.md"), "utf8");
+const galleryReadme = readFileSync(resolve(root, "screenshots/README.md"), "utf8");
+
+const check = (condition, message) => {
+  if (!condition) failures.push(message);
+};
+
+check(rootPackage.version === themeManifest.version, "Root package and theme versions differ.");
+check(
+  themeVersions[themeManifest.version] === themeManifest.minAppVersion,
+  "versions.json does not map the current theme version to minAppVersion."
+);
+check(pluginPackage.version === pluginManifest.version, "Plugin package and manifest versions differ.");
+check(
+  pluginVersions[pluginManifest.version] === pluginManifest.minAppVersion,
+  "companion/versions.json does not map the current plugin version to minAppVersion."
+);
+check(themeCss.includes("/* @settings"), "theme.css is missing Style Settings metadata.");
+check(themeCss.includes("claude-auto-hide-status-bar"), "Status-bar behavior setting is missing.");
+check(themeCss.includes("claude-hide-sync-status"), "Sync visibility setting is missing.");
+
+const fontReferences = [...themeCss.matchAll(/url\(["']fonts\/([^"')]+)["']\)/g)]
+  .map((match) => match[1]);
+check(fontReferences.length > 0, "theme.css does not reference bundled fonts.");
+for (const file of new Set(fontReferences)) {
+  check(existsSync(resolve(root, "fonts", file)), `Missing font file: fonts/${file}`);
+}
+
+for (const requiredScreenshot of [
+  "overview-light.png",
+  "overview-dark.png",
+  "live-preview-headings-light.png",
+  "quick-switcher-light.png",
+  "command-palette-dark.png",
+  "style-settings-light.png",
+  "status-bar-light.png",
+  "theme-thumbnail.png"
+]) {
+  check(
+    existsSync(resolve(root, "screenshots", requiredScreenshot)),
+    `Missing generated screenshot: screenshots/${requiredScreenshot}`
+  );
+}
+check(readme.includes("screenshots/overview-light.png"), "README is missing the light overview image.");
+check(readme.includes("screenshots/overview-dark.png"), "README is missing the dark overview image.");
+check(readme.includes("screenshots/README.md"), "README is missing the full gallery link.");
+for (const match of galleryReadme.matchAll(/!\[[^\]]*\]\(([^)]+\.png)\)/g)) {
+  check(existsSync(resolve(root, "screenshots", match[1])), `Broken gallery image link: ${match[1]}`);
+}
+
+for (const [name, version] of Object.entries(pluginPackage.devDependencies ?? {})) {
+  check(
+    typeof version === "string" && /^\d+\.\d+\.\d+(?:[-+].+)?$/.test(version),
+    `Plugin dependency ${name} must be pinned to an exact version, found ${version}.`
+  );
+}
+for (const [name, version] of Object.entries(rootPackage.devDependencies ?? {})) {
+  check(
+    typeof version === "string" && /^\d+\.\d+\.\d+(?:[-+].+)?$/.test(version),
+    `Root dependency ${name} must be pinned to an exact version, found ${version}.`
+  );
+}
+
+if (failures.length > 0) {
+  for (const failure of failures) console.error(`- ${failure}`);
+  process.exitCode = 1;
+} else {
+  console.log("Metadata, versions, settings, fonts, and dependency pins are consistent.");
+}

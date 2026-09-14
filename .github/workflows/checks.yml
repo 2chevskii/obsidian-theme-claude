@@ -1,0 +1,44 @@
+name: Checks
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Lint GitHub Actions workflows
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run metadata, CSS, plugin, and type checks
+        run: npm run check
+
+      - name: Build theme and companion
+        run: npm run build
+
+      - name: Verify committed companion bundle is current
+        run: git diff --exit-code -- companion/main.js
+
+      - name: Verify release packaging
+        shell: pwsh
+        run: ./scripts/package.ps1 -SkipBuild

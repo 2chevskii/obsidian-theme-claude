@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest a focused improvement to the Claude theme or companion.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What visual or behavioral problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Include references or mockups when they materially clarify the request.
+    validations:
+      required: true

@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a visual or companion-plugin defect.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Theme
+        - Claude Theme Companion
+        - Packaging or gallery tooling
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Obsidian, theme, and companion versions.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Include exact reproduction steps and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot or recording
+      description: Attach a full-resolution capture when the issue is visual.
