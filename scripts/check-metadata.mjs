@@ -35,6 +35,9 @@ check(themeCss.includes("claude-light-palette-default"), "Default light palette 
 check(themeCss.includes("claude-light-palette-warm"), "Warm light palette setting is missing.");
 check(themeCss.includes("claude-auto-hide-status-bar"), "Status-bar behavior setting is missing.");
 check(themeCss.includes("claude-hide-sync-status"), "Sync visibility setting is missing.");
+check(themeCss.includes("claude-code-font-geist-mono"), "Code font selector is missing.");
+check(themeCss.includes("claude-ui-font-geist-sans"), "Open Sans alternatives are missing.");
+check(themeCss.includes("claude-text-font-source-serif-4"), "Open Serif alternatives are missing.");
 
 const fontReferences = [...themeCss.matchAll(/url\(["']fonts\/([^"')]+)["']\)/g)]
   .map((match) => match[1]);

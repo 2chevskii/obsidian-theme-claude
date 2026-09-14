@@ -13,6 +13,13 @@ confirming that their intended redistribution is permitted, or for replacing
 the files and corresponding `@font-face` rules with appropriately licensed
 assets.
 
+## Open font alternatives
+
+The files under `fonts/open/` are distributed under the SIL Open Font License
+1.1. The corresponding copyright notices and complete license texts are kept
+under `fonts/licenses/`. These font files are not covered by the repository's
+MIT License.
+
 ## Trademarks
 
 Claude and Anthropic are trademarks of Anthropic PBC. Obsidian is a trademark

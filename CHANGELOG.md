@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented here.
 
+## Theme 1.0.60
+
+- Added five OFL-licensed alternatives for each Sans, Serif, and Mono role.
+- Added an independent Style Settings selector for the code font.
+
 ## Theme 1.0.59
 
 - Added Default and Warm light palette variants selectable through Style Settings.

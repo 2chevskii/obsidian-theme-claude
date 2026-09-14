@@ -16,8 +16,8 @@ This project is not affiliated with or endorsed by Anthropic or Obsidian.
 ## Highlights
 
 - Claude-inspired Default and Warm light palettes plus a coordinated dark color system.
-- Bundled Anthropic Sans, Serif, and Mono variable fonts.
-- Independent interface, note, and heading font selectors through Style Settings.
+- Bundled Anthropic fonts plus five OFL-licensed Sans, Serif, and Mono alternatives.
+- Independent interface, note, heading, and code font selectors through Style Settings.
 - Floating editor tabs, recessed sidebars, compact explorer actions, centered status bar, and polished window controls.
 - Claude-like inline code, code blocks, tables, metadata, callouts, and reading surfaces.
 - Optional auto-hiding status bar and Obsidian Sync indicator toggle.
@@ -51,9 +51,9 @@ theme. The theme remains fully usable without it.
 Install and enable the community plugin
 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings), then open
 **Settings → Style Settings → Claude**. You can switch the light palette between
-Default and Warm; select Anthropic Sans, Serif, or Mono independently for the
-interface, note body, and headings; auto-hide the status bar; and hide the
-Obsidian Sync status item.
+Default and Warm; select bundled font alternatives independently for the
+interface, note body, headings, and code; auto-hide the status bar; and hide
+the Obsidian Sync status item.
 
 ## Development
 
@@ -103,7 +103,7 @@ leave the generated showcase note in the vault.
 
 ## Releases
 
-- Push a numeric tag matching `manifest.json`, for example `1.0.59`, to publish the theme.
+- Push a numeric tag matching `manifest.json`, for example `1.0.60`, to publish the theme.
 - Push `companion-<version>`, for example `companion-1.0.0`, to publish the plugin.
 - Each release is rebuilt, validated, packaged, checksummed, and provenance-attested in GitHub Actions.
 

@@ -1,6 +1,6 @@
 {
   "name": "obsidian-theme-claude",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "private": true,
   "description": "An unofficial Claude-inspired theme and companion plugin for Obsidian.",
   "type": "module",
@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspace claude-theme-companion && node scripts/build-theme.mjs",
+    "sync:fonts": "node scripts/sync-open-fonts.mjs",
     "check": "npm run check:metadata && npm run lint:theme && npm run lint:plugin && npm run typecheck:plugin",
     "check:metadata": "node scripts/check-metadata.mjs",
     "lint:theme": "stylelint \"theme.css\" \"companion/styles.css\"",
@@ -20,6 +21,21 @@
     "package": "pwsh -NoProfile -File scripts/package.ps1"
   },
   "devDependencies": {
+    "@fontsource-variable/cascadia-code": "5.3.0",
+    "@fontsource-variable/geist": "5.3.0",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@fontsource-variable/ibm-plex-sans": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
+    "@fontsource-variable/literata": "5.3.0",
+    "@fontsource-variable/lora": "5.3.0",
+    "@fontsource-variable/onest": "5.3.1",
+    "@fontsource-variable/source-code-pro": "5.3.0",
+    "@fontsource-variable/source-sans-3": "5.3.0",
+    "@fontsource-variable/source-serif-4": "5.3.0",
+    "@fontsource-variable/stix-two-text": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.2.7",
+    "@fontsource/ibm-plex-serif": "5.2.7",
     "stylelint": "17.15.0",
     "stylelint-config-obsidianmd": "0.1.0"
   },
