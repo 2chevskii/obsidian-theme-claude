@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
@@ -13,27 +13,13 @@ const endMarker = "/* END GENERATED OPEN FONT FACES */";
 
 const variableFamilies = [
   ["geist-sans", "@fontsource-variable/geist", "Claude Geist Sans", ["wght.css", "wght-italic.css"]],
-  ["inter", "@fontsource-variable/inter", "Claude Inter", ["wght.css", "wght-italic.css"]],
-  ["onest", "@fontsource-variable/onest", "Claude Onest", ["wght.css"]],
-  ["ibm-plex-sans", "@fontsource-variable/ibm-plex-sans", "Claude IBM Plex Sans", ["wght.css", "wght-italic.css"]],
-  ["source-sans-3", "@fontsource-variable/source-sans-3", "Claude Source Sans 3", ["wght.css", "wght-italic.css"]],
-  ["source-serif-4", "@fontsource-variable/source-serif-4", "Claude Source Serif 4", ["wght.css", "wght-italic.css"]],
   ["lora", "@fontsource-variable/lora", "Claude Lora", ["wght.css", "wght-italic.css"]],
-  ["stix-two-text", "@fontsource-variable/stix-two-text", "Claude STIX Two Text", ["wght.css", "wght-italic.css"]],
   ["literata", "@fontsource-variable/literata", "Claude Literata", ["wght.css", "wght-italic.css"]],
-  ["geist-mono", "@fontsource-variable/geist-mono", "Claude Geist Mono", ["wght.css", "wght-italic.css"]],
-  ["source-code-pro", "@fontsource-variable/source-code-pro", "Claude Source Code Pro", ["wght.css", "wght-italic.css"]],
-  ["jetbrains-mono", "@fontsource-variable/jetbrains-mono", "Claude JetBrains Mono", ["wght.css", "wght-italic.css"]],
-  ["cascadia-mono", "@fontsource-variable/cascadia-code", "Claude Cascadia Mono", ["wght.css", "wght-italic.css"]]
+  ["source-code-pro", "@fontsource-variable/source-code-pro", "Claude Source Code Pro", ["wght.css", "wght-italic.css"]]
 ];
 
-const staticFamilies = [
-  ["ibm-plex-serif", "@fontsource/ibm-plex-serif", "Claude IBM Plex Serif", [
-    "400.css", "400-italic.css", "600.css", "600-italic.css", "700.css", "700-italic.css"
-  ]],
-  ["ibm-plex-mono", "@fontsource/ibm-plex-mono", "Claude IBM Plex Mono", ["400.css", "400-italic.css"]]
-];
-
+await rm(outputDirectory, { recursive: true, force: true });
+await rm(licenseDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
 await mkdir(licenseDirectory, { recursive: true });
 
@@ -41,7 +27,7 @@ const generatedFaces = [];
 const copiedFiles = new Set();
 const bundledLicenses = [];
 
-for (const [id, packageName, familyName, cssFiles] of [...variableFamilies, ...staticFamilies]) {
+for (const [id, packageName, familyName, cssFiles] of variableFamilies) {
   const packageRoot = dirname(require.resolve(`${packageName}/package.json`));
   const licensePath = resolve(packageRoot, "LICENSE");
   await copyFile(licensePath, resolve(licenseDirectory, `${id}-OFL-1.1.txt`));
@@ -90,4 +76,4 @@ await writeFile(
   `${bundledLicenses.join(`\n\n${"=".repeat(80)}\n\n`)}\n`
 );
 
-console.log(`Synced ${copiedFiles.size} WOFF2 files and ${variableFamilies.length + staticFamilies.length} OFL notices.`);
+console.log(`Synced ${copiedFiles.size} WOFF2 files and ${variableFamilies.length} OFL notices.`);

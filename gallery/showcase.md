@@ -18,7 +18,7 @@ The calm, focused surface of Claude adapted for a local knowledge base.
 
 ## Typography and rich content
 
-Anthropic Serif gives notes an editorial rhythm while **Anthropic Sans** keeps the interface quiet. Inline code such as `const answer = 42` uses Anthropic Mono.
+Lora gives notes an editorial rhythm while **Geist Sans** keeps the interface quiet. Headings use Literata, and inline code such as `const answer = 42` uses Source Code Pro.
 
 - Clear hierarchy with restrained contrast
 - Rounded controls and floating tabs
@@ -49,7 +49,7 @@ const features: ThemeFeature[] = [
 ## Tasks and links
 
 - [x] Match the Claude color system
-- [x] Bundle Anthropic typography
+- [x] Bundle OFL-licensed typography
 - [ ] Keep refining the smallest details
 
 Explore the [[README|project documentation]] or visit [Obsidian](https://obsidian.md).

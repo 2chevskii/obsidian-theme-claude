@@ -1,7 +1,7 @@
 # Claude for Obsidian
 
 An unofficial Obsidian theme inspired by the current Claude web interface. It
-ships with Default and Warm light palettes, a coordinated dark palette, Anthropic typography, compact
+ships with Default and Warm light palettes, a coordinated dark palette, bundled open-source typography, compact
 recessed sidebars, floating tabs, refined modal surfaces, and an optional
 desktop companion plugin for behavior CSS cannot provide.
 
@@ -16,8 +16,8 @@ This project is not affiliated with or endorsed by Anthropic or Obsidian.
 ## Highlights
 
 - Claude-inspired Default and Warm light palettes plus a coordinated dark color system.
-- Bundled Anthropic fonts plus five OFL-licensed Sans, Serif, and Mono alternatives.
-- Independent interface, note, heading, and code font selectors through Style Settings.
+- Fixed bundled typography: Geist Sans for the interface, Lora for notes,
+  Literata for headings, and Source Code Pro for code.
 - Floating editor tabs, recessed sidebars, compact explorer actions, centered status bar, and polished window controls.
 - Claude-like inline code, code blocks, tables, metadata, callouts, and reading surfaces.
 - Optional auto-hiding status bar and Obsidian Sync indicator toggle.
@@ -51,9 +51,8 @@ theme. The theme remains fully usable without it.
 Install and enable the community plugin
 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings), then open
 **Settings → Style Settings → Claude**. You can switch the light palette between
-Default and Warm; select bundled font alternatives independently for the
-interface, note body, headings, and code; auto-hide the status bar; and hide
-the Obsidian Sync status item.
+Default and Warm, auto-hide the status bar, and hide the Obsidian Sync status
+item. Typography is intentionally fixed by the theme.
 
 ## Development
 
@@ -103,7 +102,7 @@ leave the generated showcase note in the vault.
 
 ## Releases
 
-- Push a numeric tag matching `manifest.json`, for example `1.0.60`, to publish the theme.
+- Push a numeric tag matching `manifest.json`, for example `1.0.61`, to publish the theme.
 - Push `companion-<version>`, for example `companion-1.0.0`, to publish the plugin.
 - Each release is rebuilt, validated, packaged, checksummed, and provenance-attested in GitHub Actions.
 
@@ -113,5 +112,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the release checklist and
 ## License
 
 Theme and plugin code are available under the MIT License. The files in `fonts/`
-are excluded from that license and remain the property of their respective
-owner; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+are distributed under the SIL Open Font License 1.1; see
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

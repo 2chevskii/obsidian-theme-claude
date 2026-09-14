@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## Theme 1.0.61
+
+- Fixed typography to Geist Sans for the interface, Lora for notes, Literata
+  for headings, and Source Code Pro for code.
+- Removed typography selectors and all unused bundled font families.
+
 ## Theme 1.0.60
 
 - Added five OFL-licensed alternatives for each Sans, Serif, and Mono role.

@@ -1,24 +1,11 @@
 # Third-party notices
 
-## Anthropic fonts
+## Bundled fonts
 
-The files in `fonts/` use the Anthropic Sans, Anthropic Serif, and Anthropic Mono
-names and are not covered by this repository's MIT License. Anthropic retains
-all rights in those font files and names. This repository does not grant any
-license to them.
-
-The source collection supplied for this project did not include a redistributable
-font license. Anyone publishing a public fork or release is responsible for
-confirming that their intended redistribution is permitted, or for replacing
-the files and corresponding `@font-face` rules with appropriately licensed
-assets.
-
-## Open font alternatives
-
-The files under `fonts/open/` are distributed under the SIL Open Font License
-1.1. The corresponding copyright notices and complete license texts are kept
-under `fonts/licenses/`. These font files are not covered by the repository's
-MIT License.
+Geist Sans, Lora, Literata, and Source Code Pro are distributed under the SIL
+Open Font License 1.1. Their corresponding copyright notices and complete
+license texts are kept under `fonts/licenses/` and embedded into the release
+CSS. These font files are not covered by the repository's MIT License.
 
 ## Trademarks
 
