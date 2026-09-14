@@ -9,9 +9,9 @@ const failures = [];
 const themeManifest = readJson("theme/manifest.json");
 const themeVersions = readJson("theme/versions.json");
 const rootPackage = readJson("package.json");
-const pluginManifest = readJson("companion-plugin/manifest.json");
-const pluginVersions = readJson("companion-plugin/versions.json");
-const pluginPackage = readJson("companion-plugin/package.json");
+const pluginManifest = readJson("companion_plugin/manifest.json");
+const pluginVersions = readJson("companion_plugin/versions.json");
+const pluginPackage = readJson("companion_plugin/package.json");
 const themeCss = readFileSync(resolve(root, "theme/theme.css"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 const galleryReadme = readFileSync(resolve(root, "screenshots/README.md"), "utf8");
@@ -28,7 +28,7 @@ check(
 check(pluginPackage.version === pluginManifest.version, "Plugin package and manifest versions differ.");
 check(
   pluginVersions[pluginManifest.version] === pluginManifest.minAppVersion,
-  "companion-plugin/versions.json does not map the current plugin version to minAppVersion."
+  "companion_plugin/versions.json does not map the current plugin version to minAppVersion."
 );
 check(themeCss.includes("/* @settings"), "theme.css is missing Style Settings metadata.");
 check(themeCss.includes("claude-light-palette-default"), "Default light palette setting is missing.");

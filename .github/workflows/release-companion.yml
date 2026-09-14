@@ -29,7 +29,7 @@ jobs:
       - name: Validate release tag
         shell: pwsh
         run: |
-          $manifest = Get-Content -Raw companion-plugin/manifest.json | ConvertFrom-Json
+          $manifest = Get-Content -Raw companion_plugin/manifest.json | ConvertFrom-Json
           $expectedTag = "companion-$($manifest.version)"
           if ($env:GITHUB_REF_NAME -ne $expectedTag) {
             throw "Tag $env:GITHUB_REF_NAME must match $expectedTag."

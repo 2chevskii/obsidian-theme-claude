@@ -6,7 +6,7 @@ on:
     branches: [main]
     paths:
       - "theme/**"
-      - "companion-plugin/**"
+      - "companion_plugin/**"
       - "tools/build-theme.mjs"
       - "tools/check-metadata.mjs"
       - "tools/package.ps1"

@@ -20,8 +20,8 @@ image at full resolution. Do not commit a visual change with stale screenshots.
 Theme and companion versions are independent.
 
 - Theme: update `package.json`, `theme/manifest.json`, and `theme/versions.json`.
-- Companion: update `companion-plugin/package.json`, `companion-plugin/manifest.json`, and
-  `companion-plugin/versions.json`.
+- Companion: update `companion_plugin/package.json`, `companion_plugin/manifest.json`, and
+  `companion_plugin/versions.json`.
 
 `npm run check:metadata` rejects version drift and unpinned dependencies.
 

@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-The theme source is under `theme/`: `theme.css` plus its manifest, version map, bundled fonts, and license texts. The optional desktop companion plugin is under `companion-plugin/`: edit TypeScript in `companion-plugin/src/`, plugin CSS in `companion-plugin/styles.css`, and treat `companion-plugin/main.js` as generated build output. Automation is in `tools/`, the deterministic gallery fixture is `gallery/showcase.md`, and reviewed visual baselines are stored in `screenshots/`. Packaging writes release artifacts to the ignored `artifacts/` directory.
+The theme source is under `theme/`: `theme.css` plus its manifest, version map, bundled fonts, and license texts. The optional desktop companion plugin is under `companion_plugin/`: edit TypeScript in `companion_plugin/src/`, plugin CSS in `companion_plugin/styles.css`, and treat `companion_plugin/main.js` as generated build output. Automation is in `tools/`, the deterministic gallery fixture is `gallery/showcase.md`, and reviewed visual baselines are stored in `screenshots/`. Packaging writes release artifacts to the ignored `artifacts/` directory.
 
 ## Build, Check, and Development Commands
 
@@ -16,11 +16,11 @@ Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7. Install the locked dependency 
 
 ## Coding Style & Naming Conventions
 
-Follow `.editorconfig`: UTF-8, LF endings, final newline, spaces, and two-space indentation. Keep TypeScript strict, use `PascalCase` for classes and interfaces, `camelCase` for members and functions, and descriptive uppercase names for constants. CSS custom properties use the existing `--claude-*` naming scheme. Run Stylelint and the Obsidian ESLint configuration through `npm run check`; do not hand-edit generated `companion-plugin/main.js`.
+Follow `.editorconfig`: UTF-8, LF endings, final newline, spaces, and two-space indentation. Keep TypeScript strict, use `PascalCase` for classes and interfaces, `camelCase` for members and functions, and descriptive uppercase names for constants. CSS custom properties use the existing `--claude-*` naming scheme. Run Stylelint and the Obsidian ESLint configuration through `npm run check`; do not hand-edit generated `companion_plugin/main.js`.
 
 ## Testing & Visual Validation
 
-There is no standalone unit-test suite. The required quality gate is `npm run check`, `npm run build`, and `npm run package`. For visual changes, regenerate the gallery and inspect every light and dark image at full resolution. Check reduced-motion behavior and ensure `git diff --exit-code -- companion-plugin/main.js` would pass after building.
+There is no standalone unit-test suite. The required quality gate is `npm run check`, `npm run build`, and `npm run package`. For visual changes, regenerate the gallery and inspect every light and dark image at full resolution. Check reduced-motion behavior and ensure `git diff --exit-code -- companion_plugin/main.js` would pass after building.
 
 ## Commit & Pull Request Guidelines
 

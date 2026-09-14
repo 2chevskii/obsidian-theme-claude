@@ -203,9 +203,9 @@ try {
   if ($themeCssSource -eq (Join-Path $repoRoot "theme/theme.css")) {
     Copy-Item -LiteralPath (Join-Path $repoRoot "theme/fonts") -Destination $themeTarget -Recurse -Force
   }
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/main.js") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/manifest.json") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/styles.css") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/main.js") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/manifest.json") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/styles.css") -Destination $pluginTarget -Force
   Copy-Item -LiteralPath (Join-Path $repoRoot "gallery/showcase.md") -Destination $fixtureTarget -Force
   $fixtureCreated = $true
 

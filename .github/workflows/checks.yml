@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: Verify committed companion bundle is current
-        run: git diff --exit-code -- companion-plugin/main.js
+        run: git diff --exit-code -- companion_plugin/main.js
 
       - name: Verify release packaging
         shell: pwsh

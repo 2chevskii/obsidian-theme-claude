@@ -94,7 +94,7 @@ leave the generated showcase note in the vault.
 ## Repository layout
 
 - `theme/` — theme CSS, release metadata, and local WOFF2 font resources embedded at build time.
-- `companion-plugin/` — companion plugin source, manifest, styles, and build output.
+- `companion_plugin/` — companion plugin source, manifest, styles, and build output.
 - `gallery/showcase.md` — deterministic screenshot fixture.
 - `tools/` — metadata checks, theme build, packaging, and gallery automation.
 - `screenshots/` — generated gallery and community-directory thumbnail.
