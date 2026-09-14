@@ -15,19 +15,17 @@ $builtThemeRoot = Join-Path $repoRoot "dist/theme/Claude"
 $themeCssSource = if (Test-Path -LiteralPath (Join-Path $builtThemeRoot "theme.css")) {
   Join-Path $builtThemeRoot "theme.css"
 } else {
-  Join-Path $repoRoot "theme/theme.css"
+  Join-Path $repoRoot "theme.css"
 }
 $themeManifestSource = if (Test-Path -LiteralPath (Join-Path $builtThemeRoot "manifest.json")) {
   Join-Path $builtThemeRoot "manifest.json"
 } else {
-  Join-Path $repoRoot "theme/manifest.json"
+  Join-Path $repoRoot "manifest.json"
 }
 $backupRoot = Join-Path ([IO.Path]::GetTempPath()) "claude-theme-gallery-$([Guid]::NewGuid().ToString("N"))"
 $fixtureRelativePath = "_claude-theme-gallery/claude-theme-showcase.md"
 $debugAttached = $false
 $themeInstalledBefore = $false
-$pluginInstalledBefore = $false
-$pluginEnabledBefore = $false
 $fixtureCreated = $false
 $fixtureExistedBefore = $false
 $fixtureFolderExistedBefore = $false
@@ -169,7 +167,6 @@ if (-not (Test-Path -LiteralPath $vaultPath -PathType Container)) {
 }
 
 $themeTarget = Join-Path $vaultPath ".obsidian/themes/Claude"
-$pluginTarget = Join-Path $vaultPath ".obsidian/plugins/claude-theme-companion"
 $fixtureTarget = Join-Path $vaultPath $fixtureRelativePath
 $fixtureFolder = Split-Path $fixtureTarget
 $fixtureFolderExistedBefore = Test-Path -LiteralPath $fixtureFolder
@@ -177,8 +174,6 @@ $previousTheme = ConvertFrom-EvalJson (Invoke-Eval "app.vault.getConfig('cssThem
 $previousMode = ConvertFrom-EvalJson (Invoke-Eval "document.body.classList.contains('theme-dark') ? 'dark' : 'light'")
 $previousLightPalette = ConvertFrom-EvalJson (Invoke-Eval "document.body.classList.contains('claude-light-palette-warm') ? 'warm' : 'default'")
 $previousFile = ConvertFrom-EvalJson (Invoke-Eval "app.workspace.getActiveFile()?.path ?? ''")
-$enabledPlugins = Invoke-Obsidian -Arguments @("plugins:enabled", "filter=community", "format=json")
-$pluginEnabledBefore = $enabledPlugins -match '"claude-theme-companion"'
 
 try {
   New-Item -ItemType Directory -Path $outputRoot -Force | Out-Null
@@ -188,32 +183,21 @@ try {
     $themeInstalledBefore = $true
     Copy-Item -LiteralPath $themeTarget -Destination (Join-Path $backupRoot "Claude") -Recurse
   }
-  if (Test-Path -LiteralPath $pluginTarget) {
-    $pluginInstalledBefore = $true
-    Copy-Item -LiteralPath $pluginTarget -Destination (Join-Path $backupRoot "claude-theme-companion") -Recurse
-  }
   if (Test-Path -LiteralPath $fixtureTarget) {
     $fixtureExistedBefore = $true
     Copy-Item -LiteralPath $fixtureTarget -Destination (Join-Path $backupRoot "claude-theme-showcase.md")
   }
 
-  New-Item -ItemType Directory -Path $themeTarget, $pluginTarget, $fixtureFolder -Force | Out-Null
+  New-Item -ItemType Directory -Path $themeTarget, $fixtureFolder -Force | Out-Null
   Copy-Item -LiteralPath $themeCssSource -Destination (Join-Path $themeTarget "theme.css") -Force
   Copy-Item -LiteralPath $themeManifestSource -Destination (Join-Path $themeTarget "manifest.json") -Force
-  if ($themeCssSource -eq (Join-Path $repoRoot "theme/theme.css")) {
-    Copy-Item -LiteralPath (Join-Path $repoRoot "theme/fonts") -Destination $themeTarget -Recurse -Force
+  if ($themeCssSource -eq (Join-Path $repoRoot "theme.css")) {
+    Copy-Item -LiteralPath (Join-Path $repoRoot "fonts") -Destination $themeTarget -Recurse -Force
   }
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/main.js") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/manifest.json") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/styles.css") -Destination $pluginTarget -Force
   Copy-Item -LiteralPath (Join-Path $repoRoot "tools/gallery/showcase.md") -Destination $fixtureTarget -Force
   $fixtureCreated = $true
 
   Invoke-Obsidian -Arguments @("theme:set", "name=Claude") | Out-Null
-  if (-not $pluginEnabledBefore) {
-    Invoke-Obsidian -Arguments @("plugin:enable", "id=claude-theme-companion") | Out-Null
-  }
-  Invoke-Obsidian -Arguments @("plugin:reload", "id=claude-theme-companion") | Out-Null
   Invoke-Obsidian -Arguments @("open", "path=$fixtureRelativePath") | Out-Null
   Invoke-Obsidian -Arguments @("dev:debug", "on") | Out-Null
   $debugAttached = $true
@@ -260,10 +244,7 @@ try {
   Save-Screenshot "style-settings-light.png" | Out-Null
   Close-Overlay
 
-  Invoke-Eval "document.querySelector('.status-bar')?.classList.add('ctc-status-zone-active');true" | Out-Null
-  Start-Sleep -Milliseconds 250
   Save-Screenshot "status-bar-light.png" | Out-Null
-  Invoke-Eval "document.querySelector('.status-bar')?.classList.remove('ctc-status-zone-active');true" | Out-Null
 
   New-Thumbnail -Source $lightOverview -Destination (Join-Path $outputRoot "theme-thumbnail.png")
   Write-Output "Gallery generated at $outputRoot"
@@ -278,7 +259,7 @@ finally {
     catch { Write-Warning "Could not move the gallery fixture to trash: $_" }
   }
 
-  foreach ($target in @($themeTarget, $pluginTarget)) {
+  foreach ($target in @($themeTarget)) {
     if (Test-Path -LiteralPath $target) {
       $resolvedTarget = (Resolve-Path -LiteralPath $target).Path
       $expectedRoot = (Resolve-Path -LiteralPath (Join-Path $vaultPath ".obsidian")).Path
@@ -290,9 +271,6 @@ finally {
   }
   if ($themeInstalledBefore) {
     Move-Item -LiteralPath (Join-Path $backupRoot "Claude") -Destination $themeTarget
-  }
-  if ($pluginInstalledBefore) {
-    Move-Item -LiteralPath (Join-Path $backupRoot "claude-theme-companion") -Destination $pluginTarget
   }
   if ($fixtureExistedBefore -and -not $KeepFixture) {
     Copy-Item -LiteralPath (Join-Path $backupRoot "claude-theme-showcase.md") -Destination $fixtureTarget -Force
@@ -307,10 +285,6 @@ finally {
     try { Invoke-Obsidian -Arguments @("theme:set", "name=$previousTheme") -AllowFailure | Out-Null }
     catch { Write-Warning "Could not restore the previous theme: $_" }
   }
-  if ($pluginInstalledBefore -and $pluginEnabledBefore) {
-    try { Invoke-Obsidian -Arguments @("plugin:reload", "id=claude-theme-companion") -AllowFailure | Out-Null }
-    catch { Write-Warning "Could not reload the restored companion plugin: $_" }
-  }
   if ($previousMode) {
     try { Set-ColorMode $previousMode }
     catch { Write-Warning "Could not restore the previous color mode: $_" }
@@ -322,10 +296,6 @@ finally {
   if ($previousFile) {
     try { Invoke-Obsidian -Arguments @("open", "path=$previousFile") -AllowFailure | Out-Null }
     catch { Write-Warning "Could not reopen the previous file: $_" }
-  }
-  if (-not $pluginEnabledBefore) {
-    try { Invoke-Obsidian -Arguments @("plugin:disable", "id=claude-theme-companion") -AllowFailure | Out-Null }
-    catch { Write-Warning "Could not restore the companion plugin enabled state: $_" }
   }
   if (Test-Path -LiteralPath $backupRoot) {
     Remove-Item -LiteralPath $backupRoot -Recurse -Force

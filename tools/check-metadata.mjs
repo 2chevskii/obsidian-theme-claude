@@ -6,13 +6,10 @@ const root = resolve(import.meta.dirname, "..");
 const readJson = (path) => JSON.parse(readFileSync(resolve(root, path), "utf8"));
 const failures = [];
 
-const themeManifest = readJson("theme/manifest.json");
-const themeVersions = readJson("theme/versions.json");
+const themeManifest = readJson("manifest.json");
+const themeVersions = readJson("versions.json");
 const rootPackage = readJson("package.json");
-const pluginManifest = readJson("companion_plugin/manifest.json");
-const pluginVersions = readJson("companion_plugin/versions.json");
-const pluginPackage = readJson("companion_plugin/package.json");
-const themeCss = readFileSync(resolve(root, "theme/theme.css"), "utf8");
+const themeCss = readFileSync(resolve(root, "theme.css"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 const galleryReadme = readFileSync(resolve(root, "screenshots/README.md"), "utf8");
 
@@ -24,11 +21,6 @@ check(rootPackage.version === themeManifest.version, "Root package and theme ver
 check(
   themeVersions[themeManifest.version] === themeManifest.minAppVersion,
   "versions.json does not map the current theme version to minAppVersion."
-);
-check(pluginPackage.version === pluginManifest.version, "Plugin package and manifest versions differ.");
-check(
-  pluginVersions[pluginManifest.version] === pluginManifest.minAppVersion,
-  "companion_plugin/versions.json does not map the current plugin version to minAppVersion."
 );
 check(themeCss.includes("/* @settings"), "theme.css is missing Style Settings metadata.");
 check(themeCss.includes("claude-light-palette-default"), "Default light palette setting is missing.");
@@ -47,7 +39,7 @@ const fontReferences = [...themeCss.matchAll(/url\(["']fonts\/([^"')]+)["']\)/g)
   .map((match) => match[1]);
 check(fontReferences.length > 0, "theme.css does not reference bundled fonts.");
 for (const file of new Set(fontReferences)) {
-  check(existsSync(resolve(root, "theme/fonts", file)), `Missing font file: theme/fonts/${file}`);
+  check(existsSync(resolve(root, "fonts", file)), `Missing font file: fonts/${file}`);
 }
 
 for (const requiredScreenshot of [
@@ -73,12 +65,6 @@ for (const match of galleryReadme.matchAll(/!\[[^\]]*\]\(([^)]+\.png)\)/g)) {
   check(existsSync(resolve(root, "screenshots", match[1])), `Broken gallery image link: ${match[1]}`);
 }
 
-for (const [name, version] of Object.entries(pluginPackage.devDependencies ?? {})) {
-  check(
-    typeof version === "string" && /^\d+\.\d+\.\d+(?:[-+].+)?$/.test(version),
-    `Plugin dependency ${name} must be pinned to an exact version, found ${version}.`
-  );
-}
 for (const [name, version] of Object.entries(rootPackage.devDependencies ?? {})) {
   check(
     typeof version === "string" && /^\d+\.\d+\.\d+(?:[-+].+)?$/.test(version),

@@ -10,11 +10,11 @@ deterministic [`tools/gallery/showcase.md`](../tools/gallery/showcase.md) fixtur
 | --- | --- | --- |
 | ![Default light theme overview](overview-light.png) | ![Warm light theme overview](overview-warm.png) | ![Dark theme overview](overview-dark.png) |
 
-## Companion interactions
+## Interface states
 
 ### Live-preview headings
 
-![Animated heading markers in live preview](live-preview-headings-light.png)
+![Live-preview headings](live-preview-headings-light.png)
 
 ### Quick switcher
 

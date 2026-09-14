@@ -1,10 +1,9 @@
-name: Publish theme
+name: Start release
 
 on:
   push:
     tags:
       - "*.*.*"
-      - "!companion-*"
 
 permissions:
   contents: write
@@ -30,35 +29,32 @@ jobs:
       - name: Validate release tag
         shell: pwsh
         run: |
-          $manifest = Get-Content -Raw theme/manifest.json | ConvertFrom-Json
+          $manifest = Get-Content -Raw manifest.json | ConvertFrom-Json
           if ($env:GITHUB_REF_NAME -ne $manifest.version) {
             throw "Tag $env:GITHUB_REF_NAME must match theme version $($manifest.version)."
           }
 
-      - name: Validate and package
+      - name: Run checks and build theme
         shell: pwsh
         run: |
           npm run check
-          ./tools/package.ps1
+          npm run build
 
-      - name: Attest theme artifacts
+      - name: Attest release assets
         uses: actions/attest-build-provenance@8beda2b7ed98355c0e97c0a63bec38ae472e66c4 # v4
         with:
           subject-path: |
-            artifacts/theme/manifest.json
-            artifacts/theme/theme.css
-            artifacts/claude-theme-${{ github.ref_name }}.zip
+            dist/theme/Claude/manifest.json
+            dist/theme/Claude/theme.css
 
-      - name: Publish GitHub Release
+      - name: Create draft release
         env:
           GH_TOKEN: ${{ github.token }}
         shell: pwsh
         run: |
           gh release create $env:GITHUB_REF_NAME `
             --verify-tag `
-            --title "Claude theme $env:GITHUB_REF_NAME" `
-            --generate-notes `
-            artifacts/theme/manifest.json `
-            artifacts/theme/theme.css `
-            "artifacts/claude-theme-$env:GITHUB_REF_NAME.zip" `
-            artifacts/SHA256SUMS.txt
+            --title "Claude $env:GITHUB_REF_NAME" `
+            --draft `
+            dist/theme/Claude/manifest.json `
+            dist/theme/Claude/theme.css

@@ -3,12 +3,11 @@ import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
-const themeRoot = resolve(root, "theme");
 const require = createRequire(import.meta.url);
-const outputDirectory = resolve(themeRoot, "fonts/open");
-const licenseDirectory = resolve(themeRoot, "fonts/licenses");
-const bundledLicensePath = resolve(themeRoot, "fonts/OPEN_FONT_LICENSES.txt");
-const themePath = resolve(themeRoot, "theme.css");
+const outputDirectory = resolve(root, "fonts/open");
+const licenseDirectory = resolve(root, "fonts/licenses");
+const bundledLicensePath = resolve(root, "fonts/OPEN_FONT_LICENSES.txt");
+const themePath = resolve(root, "theme.css");
 const startMarker = "/* BEGIN GENERATED OPEN FONT FACES */";
 const endMarker = "/* END GENERATED OPEN FONT FACES */";
 

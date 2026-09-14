@@ -2,27 +2,38 @@
 
 ## Project Structure & Module Organization
 
-The theme source is under `theme/`: `theme.css` plus its manifest, version map, bundled fonts, and license texts. The optional desktop companion plugin is under `companion_plugin/`: edit TypeScript in `companion_plugin/src/`, plugin CSS in `companion_plugin/styles.css`, and treat `companion_plugin/main.js` as generated build output. Automation is in `tools/`; `tools/gallery/` holds the gallery fixture and generator, while reviewed visual baselines are in `screenshots/`. Packaging writes release artifacts to the ignored `artifacts/` directory.
+`theme.css` is the theme source; `manifest.json` and `versions.json` contain
+Obsidian release metadata. `fonts/` holds local WOFF2 files and licenses that
+are embedded into the distributable CSS. Automation is in `tools/`, with the
+gallery fixture and generator under `tools/gallery/`. Generated screenshots are
+in `screenshots/`; package outputs are ignored in `artifacts/`.
 
 ## Build, Check, and Development Commands
 
-Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7. Install the locked dependency graph with `npm ci`.
+Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7.
 
-- `npm run check` validates metadata, lints both CSS files and companion code, and type-checks TypeScript.
-- `npm run build` builds the companion bundle and produces the distributable theme CSS.
-- `npm run dev --workspace claude-theme-companion` watches and rebuilds the companion plugin.
-- `npm run package` creates release archives and SHA-256 checksums.
-- `npm run clean` removes ignored build outputs from `dist/` and `artifacts/`.
-- `pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots; Obsidian must be open and its CLI available.
+- `npm ci` installs the locked dependencies.
+- `npm run check` validates metadata and lints `theme.css`.
+- `npm run build` creates `dist/theme/Claude/` with release-ready CSS.
+- `npm run package` creates the theme ZIP and SHA-256 checksum.
+- `npm run clean` removes `dist/` and `artifacts/`.
+- `pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots.
 
-## Coding Style & Naming Conventions
+## Style, Validation, and Releases
 
-Follow `.editorconfig`: UTF-8, LF endings, final newline, spaces, and two-space indentation. Keep TypeScript strict, use `PascalCase` for classes and interfaces, `camelCase` for members and functions, and descriptive uppercase names for constants. CSS custom properties use the existing `--claude-*` naming scheme. Run Stylelint and the Obsidian ESLint configuration through `npm run check`; do not hand-edit generated `companion_plugin/main.js`.
+Follow `.editorconfig`: UTF-8, LF, final newline, spaces, and two-space
+indentation. Keep CSS custom properties in the established `--claude-*`
+namespace. Run checks, build, and package before submitting visual changes;
+inspect refreshed screenshots and reduced-motion behavior.
 
-## Testing & Visual Validation
+Keep `package.json` and `manifest.json` versions identical, and add the same
+version to `versions.json`. Pushing the matching numeric tag runs
+`start_release.yml`, which validates and builds the theme before creating a
+draft release with `manifest.json` and `theme.css`. Review its notes and publish
+the draft manually.
 
-There is no standalone unit-test suite. The required quality gate is `npm run check`, `npm run build`, and `npm run package`. For visual changes, regenerate the gallery and inspect every light and dark image at full resolution. Check reduced-motion behavior and ensure `git diff --exit-code -- companion_plugin/main.js` would pass after building.
+## Commits and Pull Requests
 
-## Commit & Pull Request Guidelines
-
-History uses short Conventional Commit-style subjects such as `feat: add warm light palette` and `fix: misc fixes`. Keep each commit focused. Pull requests must summarize the visual or behavioral change and record validation performed. Link relevant issues, include refreshed screenshots for visual work, and note reduced-motion impact. Keep theme and companion version changes independent and update all corresponding package, manifest, and versions files together.
+Use focused Conventional Commit-style subjects such as `feat: add warm palette`
+or `fix: correct metadata`. Describe behavior changes and validation in pull
+requests. Include updated screenshots for visual changes.

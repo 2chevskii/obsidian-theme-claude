@@ -12,23 +12,20 @@ npm run build
 npm run package
 ```
 
-Run the gallery generator after any visual change and inspect every generated
-image at full resolution. Do not commit a visual change with stale screenshots.
+Run the gallery generator after visual changes and inspect every generated
+image at full resolution. Do not commit visual changes with stale screenshots.
 
 ## Versioning
 
-Theme and companion versions are independent.
-
-- Theme: update `package.json`, `theme/manifest.json`, and `theme/versions.json`.
-- Companion: update `companion_plugin/package.json`, `companion_plugin/manifest.json`, and
-  `companion_plugin/versions.json`.
-
-`npm run check:metadata` rejects version drift and unpinned dependencies.
+For each release, update `package.json` and `manifest.json` to the same
+Semantic Versioning value, then add the corresponding minimum Obsidian version
+to `versions.json`. `npm run check:metadata` rejects version drift.
 
 ## Release checklist
 
-1. Run all checks and packaging locally.
+1. Run checks, build, and packaging locally.
 2. Generate and inspect the screenshot gallery.
-3. Confirm `artifacts/SHA256SUMS.txt` matches both archives.
-4. Push a numeric theme tag or a `companion-<version>` plugin tag.
-5. Verify the published GitHub Release assets and provenance attestations.
+3. Push a numeric tag matching `manifest.json`.
+4. Verify that GitHub Actions created a draft release with `manifest.json` and
+   `theme.css`.
+5. Add release notes, publish the draft, and verify the release assets.

@@ -1,6 +1,7 @@
-name: Checks
+name: Main
 
 on:
+  workflow_dispatch:
   push:
     branches: ["**"]
   pull_request:
@@ -30,15 +31,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run metadata, CSS, plugin, and type checks
+      - name: Run metadata and CSS checks
         run: npm run check
 
-      - name: Build theme and companion
+      - name: Build theme
         run: npm run build
 
-      - name: Verify committed companion bundle is current
-        run: git diff --exit-code -- companion_plugin/main.js
-
-      - name: Verify release packaging
+      - name: Package theme
         shell: pwsh
         run: ./tools/package.ps1 -SkipBuild
+
+      - name: Upload theme package
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: claude-theme
+          path: |
+            artifacts/theme/
+            artifacts/claude-theme-*.zip
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
+          compression-level: 0
