@@ -11,6 +11,7 @@
     "companion_plugin"
   ],
   "scripts": {
+    "clean": "node tools/clean.mjs",
     "build": "npm run build --workspace claude-theme-companion && node tools/build-theme.mjs",
     "sync:fonts": "node tools/sync-open-fonts.mjs",
     "check": "npm run check:metadata && npm run lint:theme && npm run lint:plugin && npm run typecheck:plugin",

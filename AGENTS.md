@@ -12,6 +12,7 @@ Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7. Install the locked dependency 
 - `npm run build` builds the companion bundle and produces the distributable theme CSS.
 - `npm run dev --workspace claude-theme-companion` watches and rebuilds the companion plugin.
 - `npm run package` creates release archives and SHA-256 checksums.
+- `npm run clean` removes ignored build outputs from `dist/` and `artifacts/`.
 - `pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots; Obsidian must be open and its CLI available.
 
 ## Coding Style & Naming Conventions

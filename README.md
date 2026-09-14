@@ -69,10 +69,11 @@ npm ci
 npm run check
 npm run build
 npm run package
+npm run clean
 ```
 
 Release-ready archives, flat Obsidian assets, and SHA-256 checksums are written
-to `artifacts/`. The distributable theme CSS embeds the local WOFF2 files, so a
+to `artifacts/`. Run `npm run clean` to remove `dist/` and `artifacts/`. The distributable theme CSS embeds the local WOFF2 files, so a
 GitHub Release remains self-contained even though Obsidian downloads only
 `manifest.json` and `theme.css` for a theme update.
 
