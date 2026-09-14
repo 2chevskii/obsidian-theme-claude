@@ -3,13 +3,13 @@ param(
   [Parameter(Mandatory)]
   [string]$VaultName,
 
-  [string]$OutputDirectory = (Join-Path $PSScriptRoot "../screenshots"),
+  [string]$OutputDirectory = (Join-Path $PSScriptRoot "../../screenshots"),
 
   [switch]$KeepFixture
 )
 
 $ErrorActionPreference = "Stop"
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $outputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 $builtThemeRoot = Join-Path $repoRoot "dist/theme/Claude"
 $themeCssSource = if (Test-Path -LiteralPath (Join-Path $builtThemeRoot "theme.css")) {
@@ -206,7 +206,7 @@ try {
   Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/main.js") -Destination $pluginTarget -Force
   Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/manifest.json") -Destination $pluginTarget -Force
   Copy-Item -LiteralPath (Join-Path $repoRoot "companion_plugin/styles.css") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "gallery/showcase.md") -Destination $fixtureTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "tools/gallery/showcase.md") -Destination $fixtureTarget -Force
   $fixtureCreated = $true
 
   Invoke-Obsidian -Arguments @("theme:set", "name=Claude") | Out-Null

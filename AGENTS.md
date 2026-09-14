@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-The theme source is under `theme/`: `theme.css` plus its manifest, version map, bundled fonts, and license texts. The optional desktop companion plugin is under `companion_plugin/`: edit TypeScript in `companion_plugin/src/`, plugin CSS in `companion_plugin/styles.css`, and treat `companion_plugin/main.js` as generated build output. Automation is in `tools/`, the deterministic gallery fixture is `gallery/showcase.md`, and reviewed visual baselines are stored in `screenshots/`. Packaging writes release artifacts to the ignored `artifacts/` directory.
+The theme source is under `theme/`: `theme.css` plus its manifest, version map, bundled fonts, and license texts. The optional desktop companion plugin is under `companion_plugin/`: edit TypeScript in `companion_plugin/src/`, plugin CSS in `companion_plugin/styles.css`, and treat `companion_plugin/main.js` as generated build output. Automation is in `tools/`; `tools/gallery/` holds the gallery fixture and generator, while reviewed visual baselines are in `screenshots/`. Packaging writes release artifacts to the ignored `artifacts/` directory.
 
 ## Build, Check, and Development Commands
 
@@ -12,7 +12,7 @@ Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7. Install the locked dependency 
 - `npm run build` builds the companion bundle and produces the distributable theme CSS.
 - `npm run dev --workspace claude-theme-companion` watches and rebuilds the companion plugin.
 - `npm run package` creates release archives and SHA-256 checksums.
-- `pwsh -NoProfile -File tools/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots; Obsidian must be open and its CLI available.
+- `pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots; Obsidian must be open and its CLI available.
 
 ## Coding Style & Naming Conventions
 

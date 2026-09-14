@@ -84,7 +84,7 @@ restores the previous theme, plugin files, active note, and color mode.
 
 ```powershell
 npm run build
-pwsh -NoProfile -File tools/generate-gallery.ps1 -VaultName "My Vault"
+pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"
 ```
 
 Obsidian must be open, the official Obsidian CLI must be available, and Style
@@ -95,8 +95,7 @@ leave the generated showcase note in the vault.
 
 - `theme/` — theme CSS, release metadata, and local WOFF2 font resources embedded at build time.
 - `companion_plugin/` — companion plugin source, manifest, styles, and build output.
-- `gallery/showcase.md` — deterministic screenshot fixture.
-- `tools/` — metadata checks, theme build, packaging, and gallery automation.
+- `tools/` — metadata checks, theme build, packaging, and gallery automation; `tools/gallery/` contains the gallery fixture and generator.
 - `screenshots/` — generated gallery and community-directory thumbnail.
 
 ## Releases
