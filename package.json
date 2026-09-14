@@ -1,6 +1,6 @@
 {
   "name": "obsidian-theme-claude",
-  "version": "1.0.58",
+  "version": "1.0.59",
   "private": true,
   "description": "An unofficial Claude-inspired theme and companion plugin for Obsidian.",
   "type": "module",

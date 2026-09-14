@@ -1,7 +1,7 @@
 # Claude for Obsidian
 
 An unofficial Obsidian theme inspired by the current Claude web interface. It
-ships with coordinated light and dark palettes, Anthropic typography, compact
+ships with Default and Warm light palettes, a coordinated dark palette, Anthropic typography, compact
 recessed sidebars, floating tabs, refined modal surfaces, and an optional
 desktop companion plugin for behavior CSS cannot provide.
 
@@ -15,7 +15,7 @@ This project is not affiliated with or endorsed by Anthropic or Obsidian.
 
 ## Highlights
 
-- Claude-inspired light and dark color systems.
+- Claude-inspired Default and Warm light palettes plus a coordinated dark color system.
 - Bundled Anthropic Sans, Serif, and Mono variable fonts.
 - Independent interface, note, and heading font selectors through Style Settings.
 - Floating editor tabs, recessed sidebars, compact explorer actions, centered status bar, and polished window controls.
@@ -50,9 +50,10 @@ theme. The theme remains fully usable without it.
 
 Install and enable the community plugin
 [Style Settings](https://github.com/mgmeyers/obsidian-style-settings), then open
-**Settings → Style Settings → Claude**. You can select Anthropic Sans, Serif, or
-Mono independently for the interface, note body, and headings; auto-hide the
-status bar; and hide the Obsidian Sync status item.
+**Settings → Style Settings → Claude**. You can switch the light palette between
+Default and Warm; select Anthropic Sans, Serif, or Mono independently for the
+interface, note body, and headings; auto-hide the status bar; and hide the
+Obsidian Sync status item.
 
 ## Development
 
@@ -102,7 +103,7 @@ leave the generated showcase note in the vault.
 
 ## Releases
 
-- Push a numeric tag matching `manifest.json`, for example `1.0.58`, to publish the theme.
+- Push a numeric tag matching `manifest.json`, for example `1.0.59`, to publish the theme.
 - Push `companion-<version>`, for example `companion-1.0.0`, to publish the plugin.
 - Each release is rebuilt, validated, packaged, checksummed, and provenance-attested in GitHub Actions.
 

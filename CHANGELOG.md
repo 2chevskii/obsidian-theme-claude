@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## Theme 1.0.59
+
+- Added Default and Warm light palette variants selectable through Style Settings.
+
 ## Theme 1.0.58
 
 - Added coordinated Claude-inspired light and dark palettes.

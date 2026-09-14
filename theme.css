@@ -4,6 +4,26 @@ name: Claude
 id: claude-theme
 settings:
   -
+    id: claude-colors
+    title: Цветовая схема
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: claude-light-palette
+    title: Светлая палитра
+    description: Цветовая вариация светлого режима
+    type: class-select
+    allowEmpty: false
+    default: claude-light-palette-default
+    options:
+      -
+        label: Default
+        value: claude-light-palette-default
+      -
+        label: Warm
+        value: claude-light-palette-warm
+  -
     id: claude-typography
     title: Типографика
     type: heading
@@ -260,6 +280,48 @@ body.claude-heading-font-mono {
   --claude-modal-backdrop: rgb(11 11 11 / 8%);
   --claude-shadow-sm: 0 1px 2px rgb(11 11 11 / 4%);
   --claude-shadow-lg: 0 12px 36px rgb(11 11 11 / 10%);
+}
+
+body.theme-light.claude-light-palette-warm {
+  --background-primary: #faf9f5;
+  --background-primary-alt: #f1eee8;
+  --background-secondary: #f3f0e9;
+  --background-secondary-alt: #e7e2d8;
+  --background-modifier-hover: #efebe3;
+  --background-modifier-active-hover: #ebe6dc;
+  --background-modifier-border: #e2ddd3;
+  --background-modifier-border-hover: #d3ccbf;
+  --background-modifier-form-field: #fffdf9;
+  --background-modifier-form-field-highlighted: #faf9f5;
+  --background-modifier-box-shadow: rgb(49 43 36 / 11%);
+  --background-modifier-cover: rgb(49 43 36 / 35%);
+  --text-normal: #26221e;
+  --text-muted: #615b53;
+  --text-faint: #91897e;
+  --icon-color: #615b53;
+  --icon-color-hover: #26221e;
+  --nav-item-color: #615b53;
+  --nav-item-color-hover: #26221e;
+  --nav-item-color-active: #26221e;
+  --nav-item-background-active: #eae5dc;
+  --nav-item-background-hover: #efebe3;
+  --tab-text-color: #615b53;
+  --tab-text-color-active: #26221e;
+  --tab-container-background: #f3f0e9;
+  --divider-color: #ddd7cc;
+  --blockquote-border-color: #ddd7cc;
+  --blockquote-color: #615b53;
+  --code-background: #efebe3;
+  --code-normal: #26221e;
+  --link-unresolved-color: #91897e;
+  --claude-surface-raised: #fffdf9;
+  --claude-surface-soft: #efebe3;
+  --claude-user-bubble: #efebe3;
+  --claude-inline-code-background: #efebe3;
+  --claude-inline-code-border: #d8d1c5;
+  --claude-modal-backdrop: rgb(49 43 36 / 8%);
+  --claude-shadow-sm: 0 1px 2px rgb(49 43 36 / 5%);
+  --claude-shadow-lg: 0 12px 36px rgb(49 43 36 / 11%);
 }
 
 .theme-dark {

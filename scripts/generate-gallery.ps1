@@ -70,6 +70,14 @@ function Set-ColorMode {
   }
 }
 
+function Set-LightPalette {
+  param([ValidateSet("default", "warm")][string]$Palette)
+  $className = "claude-light-palette-$Palette"
+  $code = "document.body.classList.remove('claude-light-palette-default','claude-light-palette-warm');document.body.classList.add('$className');true"
+  Invoke-Eval $code | Out-Null
+  Start-Sleep -Milliseconds 300
+}
+
 function Close-Overlay {
   Invoke-Obsidian -Arguments @(
     "dev:cdp",
@@ -167,6 +175,7 @@ $fixtureFolder = Split-Path $fixtureTarget
 $fixtureFolderExistedBefore = Test-Path -LiteralPath $fixtureFolder
 $previousTheme = ConvertFrom-EvalJson (Invoke-Eval "app.vault.getConfig('cssTheme') ?? ''")
 $previousMode = ConvertFrom-EvalJson (Invoke-Eval "document.body.classList.contains('theme-dark') ? 'dark' : 'light'")
+$previousLightPalette = ConvertFrom-EvalJson (Invoke-Eval "document.body.classList.contains('claude-light-palette-warm') ? 'warm' : 'default'")
 $previousFile = ConvertFrom-EvalJson (Invoke-Eval "app.workspace.getActiveFile()?.path ?? ''")
 $enabledPlugins = Invoke-Obsidian -Arguments @("plugins:enabled", "filter=community", "format=json")
 $pluginEnabledBefore = $enabledPlugins -match '"claude-theme-companion"'
@@ -214,7 +223,12 @@ try {
   Invoke-Obsidian -Arguments @("open", "path=$fixtureRelativePath") | Out-Null
   Invoke-Eval "document.querySelector('.workspace-leaf.mod-active .cm-scroller')?.scrollTo(0,0);true" | Out-Null
   Set-ColorMode light
+  Set-LightPalette default
   $lightOverview = Save-Screenshot "overview-light.png"
+
+  Set-LightPalette warm
+  Save-Screenshot "overview-warm.png" | Out-Null
+  Set-LightPalette default
 
   Set-ColorMode dark
   Save-Screenshot "overview-dark.png" | Out-Null
@@ -300,6 +314,10 @@ finally {
   if ($previousMode) {
     try { Set-ColorMode $previousMode }
     catch { Write-Warning "Could not restore the previous color mode: $_" }
+  }
+  if ($previousLightPalette) {
+    try { Set-LightPalette $previousLightPalette }
+    catch { Write-Warning "Could not restore the previous light palette: $_" }
   }
   if ($previousFile) {
     try { Invoke-Obsidian -Arguments @("open", "path=$previousFile") -AllowFailure | Out-Null }

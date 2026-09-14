@@ -31,6 +31,8 @@ check(
   "companion/versions.json does not map the current plugin version to minAppVersion."
 );
 check(themeCss.includes("/* @settings"), "theme.css is missing Style Settings metadata.");
+check(themeCss.includes("claude-light-palette-default"), "Default light palette setting is missing.");
+check(themeCss.includes("claude-light-palette-warm"), "Warm light palette setting is missing.");
 check(themeCss.includes("claude-auto-hide-status-bar"), "Status-bar behavior setting is missing.");
 check(themeCss.includes("claude-hide-sync-status"), "Sync visibility setting is missing.");
 
@@ -43,6 +45,7 @@ for (const file of new Set(fontReferences)) {
 
 for (const requiredScreenshot of [
   "overview-light.png",
+  "overview-warm.png",
   "overview-dark.png",
   "live-preview-headings-light.png",
   "quick-switcher-light.png",

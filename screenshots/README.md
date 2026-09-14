@@ -6,9 +6,9 @@ deterministic [`gallery/showcase.md`](../gallery/showcase.md) fixture.
 
 ## Overview
 
-| Light | Dark |
-| --- | --- |
-| ![Light theme overview](overview-light.png) | ![Dark theme overview](overview-dark.png) |
+| Default light | Warm light | Dark |
+| --- | --- | --- |
+| ![Default light theme overview](overview-light.png) | ![Warm light theme overview](overview-warm.png) | ![Dark theme overview](overview-dark.png) |
 
 ## Companion interactions
 
