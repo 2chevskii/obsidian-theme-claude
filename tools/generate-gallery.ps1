@@ -15,12 +15,12 @@ $builtThemeRoot = Join-Path $repoRoot "dist/theme/Claude"
 $themeCssSource = if (Test-Path -LiteralPath (Join-Path $builtThemeRoot "theme.css")) {
   Join-Path $builtThemeRoot "theme.css"
 } else {
-  Join-Path $repoRoot "theme.css"
+  Join-Path $repoRoot "theme/theme.css"
 }
 $themeManifestSource = if (Test-Path -LiteralPath (Join-Path $builtThemeRoot "manifest.json")) {
   Join-Path $builtThemeRoot "manifest.json"
 } else {
-  Join-Path $repoRoot "manifest.json"
+  Join-Path $repoRoot "theme/manifest.json"
 }
 $backupRoot = Join-Path ([IO.Path]::GetTempPath()) "claude-theme-gallery-$([Guid]::NewGuid().ToString("N"))"
 $fixtureRelativePath = "_claude-theme-gallery/claude-theme-showcase.md"
@@ -200,12 +200,12 @@ try {
   New-Item -ItemType Directory -Path $themeTarget, $pluginTarget, $fixtureFolder -Force | Out-Null
   Copy-Item -LiteralPath $themeCssSource -Destination (Join-Path $themeTarget "theme.css") -Force
   Copy-Item -LiteralPath $themeManifestSource -Destination (Join-Path $themeTarget "manifest.json") -Force
-  if ($themeCssSource -eq (Join-Path $repoRoot "theme.css")) {
-    Copy-Item -LiteralPath (Join-Path $repoRoot "fonts") -Destination $themeTarget -Recurse -Force
+  if ($themeCssSource -eq (Join-Path $repoRoot "theme/theme.css")) {
+    Copy-Item -LiteralPath (Join-Path $repoRoot "theme/fonts") -Destination $themeTarget -Recurse -Force
   }
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion/main.js") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion/manifest.json") -Destination $pluginTarget -Force
-  Copy-Item -LiteralPath (Join-Path $repoRoot "companion/styles.css") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/main.js") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/manifest.json") -Destination $pluginTarget -Force
+  Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/styles.css") -Destination $pluginTarget -Force
   Copy-Item -LiteralPath (Join-Path $repoRoot "gallery/showcase.md") -Destination $fixtureTarget -Force
   $fixtureCreated = $true
 

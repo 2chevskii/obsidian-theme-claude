@@ -8,17 +8,17 @@
     "node": ">=24"
   },
   "workspaces": [
-    "companion"
+    "companion-plugin"
   ],
   "scripts": {
-    "build": "npm run build --workspace claude-theme-companion && node scripts/build-theme.mjs",
-    "sync:fonts": "node scripts/sync-open-fonts.mjs",
+    "build": "npm run build --workspace claude-theme-companion && node tools/build-theme.mjs",
+    "sync:fonts": "node tools/sync-open-fonts.mjs",
     "check": "npm run check:metadata && npm run lint:theme && npm run lint:plugin && npm run typecheck:plugin",
-    "check:metadata": "node scripts/check-metadata.mjs",
-    "lint:theme": "stylelint \"theme.css\" \"companion/styles.css\"",
+    "check:metadata": "node tools/check-metadata.mjs",
+    "lint:theme": "stylelint \"theme/theme.css\" \"companion-plugin/styles.css\"",
     "lint:plugin": "npm run lint --workspace claude-theme-companion",
     "typecheck:plugin": "npm run typecheck --workspace claude-theme-companion",
-    "package": "pwsh -NoProfile -File scripts/package.ps1"
+    "package": "pwsh -NoProfile -File tools/package.ps1"
   },
   "devDependencies": {
     "@fontsource-variable/geist": "5.3.0",

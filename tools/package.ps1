@@ -19,16 +19,16 @@ if (-not $SkipBuild) {
   }
 }
 
-$themeManifest = Get-Content -Raw (Join-Path $repoRoot "manifest.json") | ConvertFrom-Json
-$pluginManifest = Get-Content -Raw (Join-Path $repoRoot "companion/manifest.json") | ConvertFrom-Json
+$themeManifest = Get-Content -Raw (Join-Path $repoRoot "theme/manifest.json") | ConvertFrom-Json
+$pluginManifest = Get-Content -Raw (Join-Path $repoRoot "companion-plugin/manifest.json") | ConvertFrom-Json
 $themeSource = Join-Path $distRoot "theme/Claude"
 $pluginSource = Join-Path $distRoot "plugin/claude-theme-companion"
 
 if (-not (Test-Path -LiteralPath (Join-Path $themeSource "theme.css"))) {
   throw "Built theme is missing. Run npm run build first."
 }
-if (-not (Test-Path -LiteralPath (Join-Path $repoRoot "companion/main.js"))) {
-  throw "Built companion/main.js is missing. Run npm run build first."
+if (-not (Test-Path -LiteralPath (Join-Path $repoRoot "companion-plugin/main.js"))) {
+  throw "Built companion-plugin/main.js is missing. Run npm run build first."
 }
 
 if (Test-Path -LiteralPath $artifactsRoot) {
@@ -42,9 +42,9 @@ if (Test-Path -LiteralPath $artifactsRoot) {
 New-Item -ItemType Directory -Path $artifactsRoot, (Join-Path $artifactsRoot "theme"), (Join-Path $artifactsRoot "companion") | Out-Null
 New-Item -ItemType Directory -Path $pluginSource -Force | Out-Null
 
-Copy-Item -LiteralPath (Join-Path $repoRoot "companion/main.js") -Destination $pluginSource -Force
-Copy-Item -LiteralPath (Join-Path $repoRoot "companion/manifest.json") -Destination $pluginSource -Force
-Copy-Item -LiteralPath (Join-Path $repoRoot "companion/styles.css") -Destination $pluginSource -Force
+Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/main.js") -Destination $pluginSource -Force
+Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/manifest.json") -Destination $pluginSource -Force
+Copy-Item -LiteralPath (Join-Path $repoRoot "companion-plugin/styles.css") -Destination $pluginSource -Force
 
 Copy-Item -LiteralPath (Join-Path $themeSource "manifest.json") -Destination (Join-Path $artifactsRoot "theme") -Force
 Copy-Item -LiteralPath (Join-Path $themeSource "theme.css") -Destination (Join-Path $artifactsRoot "theme") -Force

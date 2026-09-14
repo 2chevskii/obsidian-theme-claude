@@ -29,7 +29,7 @@ jobs:
       - name: Validate release tag
         shell: pwsh
         run: |
-          $manifest = Get-Content -Raw companion/manifest.json | ConvertFrom-Json
+          $manifest = Get-Content -Raw companion-plugin/manifest.json | ConvertFrom-Json
           $expectedTag = "companion-$($manifest.version)"
           if ($env:GITHUB_REF_NAME -ne $expectedTag) {
             throw "Tag $env:GITHUB_REF_NAME must match $expectedTag."
@@ -39,7 +39,7 @@ jobs:
         shell: pwsh
         run: |
           npm run check
-          ./scripts/package.ps1
+          ./tools/package.ps1
 
       - name: Attest companion artifacts
         uses: actions/attest-build-provenance@8beda2b7ed98355c0e97c0a63bec38ae472e66c4 # v4

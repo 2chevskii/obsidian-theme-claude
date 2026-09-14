@@ -33,7 +33,7 @@ This project is not affiliated with or endorsed by Anthropic or Obsidian.
 2. Extract the `Claude` folder into `<vault>/.obsidian/themes/`.
 3. In Obsidian, open **Settings → Appearance → Themes** and select **Claude**.
 
-The numeric release tag always matches the version in the root `manifest.json`,
+The numeric release tag always matches the version in `theme/manifest.json`,
 which keeps the theme compatible with Obsidian's release updater.
 
 ### Claude Theme Companion
@@ -84,7 +84,7 @@ restores the previous theme, plugin files, active note, and color mode.
 
 ```powershell
 npm run build
-pwsh -NoProfile -File scripts/generate-gallery.ps1 -VaultName "My Vault"
+pwsh -NoProfile -File tools/generate-gallery.ps1 -VaultName "My Vault"
 ```
 
 Obsidian must be open, the official Obsidian CLI must be available, and Style
@@ -93,16 +93,15 @@ leave the generated showcase note in the vault.
 
 ## Repository layout
 
-- `theme.css`, `manifest.json`, `versions.json` — theme source and release metadata.
-- `fonts/` — local WOFF2 font resources used during development and embedded at build time.
-- `companion/` — companion plugin source, manifest, styles, and build output.
+- `theme/` — theme CSS, release metadata, and local WOFF2 font resources embedded at build time.
+- `companion-plugin/` — companion plugin source, manifest, styles, and build output.
 - `gallery/showcase.md` — deterministic screenshot fixture.
-- `scripts/` — metadata checks, theme build, packaging, and gallery automation.
+- `tools/` — metadata checks, theme build, packaging, and gallery automation.
 - `screenshots/` — generated gallery and community-directory thumbnail.
 
 ## Releases
 
-- Push a numeric tag matching `manifest.json`, for example `1.0.61`, to publish the theme.
+- Push a numeric tag matching `theme/manifest.json`, for example `1.0.61`, to publish the theme.
 - Push `companion-<version>`, for example `companion-1.0.0`, to publish the plugin.
 - Each release is rebuilt, validated, packaged, checksummed, and provenance-attested in GitHub Actions.
 
@@ -111,6 +110,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the release checklist and
 
 ## License
 
-Theme and plugin code are available under the MIT License. The files in `fonts/`
+Theme and plugin code are available under the MIT License. The files in `theme/fonts/`
 are distributed under the SIL Open Font License 1.1; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

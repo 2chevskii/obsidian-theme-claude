@@ -6,13 +6,13 @@ const root = resolve(import.meta.dirname, "..");
 const readJson = (path) => JSON.parse(readFileSync(resolve(root, path), "utf8"));
 const failures = [];
 
-const themeManifest = readJson("manifest.json");
-const themeVersions = readJson("versions.json");
+const themeManifest = readJson("theme/manifest.json");
+const themeVersions = readJson("theme/versions.json");
 const rootPackage = readJson("package.json");
-const pluginManifest = readJson("companion/manifest.json");
-const pluginVersions = readJson("companion/versions.json");
-const pluginPackage = readJson("companion/package.json");
-const themeCss = readFileSync(resolve(root, "theme.css"), "utf8");
+const pluginManifest = readJson("companion-plugin/manifest.json");
+const pluginVersions = readJson("companion-plugin/versions.json");
+const pluginPackage = readJson("companion-plugin/package.json");
+const themeCss = readFileSync(resolve(root, "theme/theme.css"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 const galleryReadme = readFileSync(resolve(root, "screenshots/README.md"), "utf8");
 
@@ -28,7 +28,7 @@ check(
 check(pluginPackage.version === pluginManifest.version, "Plugin package and manifest versions differ.");
 check(
   pluginVersions[pluginManifest.version] === pluginManifest.minAppVersion,
-  "companion/versions.json does not map the current plugin version to minAppVersion."
+  "companion-plugin/versions.json does not map the current plugin version to minAppVersion."
 );
 check(themeCss.includes("/* @settings"), "theme.css is missing Style Settings metadata.");
 check(themeCss.includes("claude-light-palette-default"), "Default light palette setting is missing.");
@@ -47,7 +47,7 @@ const fontReferences = [...themeCss.matchAll(/url\(["']fonts\/([^"')]+)["']\)/g)
   .map((match) => match[1]);
 check(fontReferences.length > 0, "theme.css does not reference bundled fonts.");
 for (const file of new Set(fontReferences)) {
-  check(existsSync(resolve(root, "fonts", file)), `Missing font file: fonts/${file}`);
+  check(existsSync(resolve(root, "theme/fonts", file)), `Missing font file: theme/fonts/${file}`);
 }
 
 for (const requiredScreenshot of [

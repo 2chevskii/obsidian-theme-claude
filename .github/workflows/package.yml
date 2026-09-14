@@ -5,14 +5,11 @@ on:
   push:
     branches: [main]
     paths:
-      - "theme.css"
-      - "manifest.json"
-      - "versions.json"
-      - "fonts/**"
-      - "companion/**"
-      - "scripts/build-theme.mjs"
-      - "scripts/check-metadata.mjs"
-      - "scripts/package.ps1"
+      - "theme/**"
+      - "companion-plugin/**"
+      - "tools/build-theme.mjs"
+      - "tools/check-metadata.mjs"
+      - "tools/package.ps1"
       - "package.json"
       - "package-lock.json"
 
@@ -39,7 +36,7 @@ jobs:
         shell: pwsh
         run: |
           npm run check
-          ./scripts/package.ps1
+          ./tools/package.ps1
 
       - name: Upload installable packages
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
