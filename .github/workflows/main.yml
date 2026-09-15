@@ -3,9 +3,7 @@ name: Main
 on:
   workflow_dispatch:
   push:
-    branches: ["**"]
   pull_request:
-    branches: ["**"]
 
 permissions:
   contents: read
@@ -14,8 +12,7 @@ jobs:
   lint_workflows:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
       - name: Lint GitHub Actions workflows
         uses: docker://rhysd/actionlint:1.7.12
@@ -25,43 +22,31 @@ jobs:
   validate_theme:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
-      - name: Use Node.js 24
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Run metadata and CSS checks
-        run: npm run check
+      - run: npm run check
 
   package_theme:
     needs: [lint_workflows, validate_theme]
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
-      - name: Use Node.js 24
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Build theme
-        run: npm run build
-
-      - name: Package theme
-        shell: pwsh
-        run: ./tools/package.ps1 -SkipBuild
+      - run: npm run package
 
       - name: Upload theme package
         uses: actions/upload-artifact@v6
