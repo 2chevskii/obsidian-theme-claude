@@ -1,0 +1,45 @@
+/* @settings
+
+name: Claude
+id: claude-theme
+settings:
+  -
+    id: claude-colors
+    title: Цветовая схема
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: claude-light-palette
+    title: Светлая палитра
+    description: Цветовая вариация светлого режима
+    type: class-select
+    allowEmpty: false
+    default: claude-light-palette-default
+    options:
+      -
+        label: Default
+        value: claude-light-palette-default
+      -
+        label: Warm
+        value: claude-light-palette-warm
+  -
+    id: claude-behavior
+    title: Поведение интерфейса
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: claude-auto-hide-status-bar
+    title: Автоматически скрывать статус-бар
+    description: Показывать статус-бар при наведении на нижнюю центральную область окна
+    type: class-toggle
+    default: true
+  -
+    id: claude-hide-sync-status
+    title: Скрывать кнопку Obsidian Sync
+    description: Убирать индикатор и кнопку Obsidian Sync из статус-бара
+    type: class-toggle
+    default: false
+
+*/

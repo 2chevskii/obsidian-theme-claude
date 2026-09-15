@@ -1,0 +1,110 @@
+.status-bar {
+  --icon-size: 18px;
+
+  right: 0;
+  left: 0;
+  width: max-content;
+  max-width: 100%;
+  height: 30px;
+  min-height: 30px;
+  margin: 0 auto 8px;
+  padding: 4px 10px;
+  gap: 5px;
+  background: color-mix(in srgb, var(--claude-surface-raised) 92%, transparent);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--claude-radius-sm);
+  box-shadow: var(--claude-shadow-sm);
+  backdrop-filter: blur(12px);
+  font-size: 14px;
+  transform-origin: bottom center;
+  transform: none;
+}
+
+body:not(.is-fullscreen) .status-bar {
+  padding-right: 10px;
+}
+
+.status-bar .svg-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.status-bar > .status-bar-item {
+  position: relative;
+  z-index: 1;
+}
+
+body.claude-hide-sync-status .status-bar > .plugin-sync {
+  display: none;
+}
+
+body.claude-auto-hide-status-bar .status-bar {
+  overflow: visible;
+  transition:
+    height 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    min-height 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    max-width 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    margin-bottom 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    padding 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+}
+
+body.claude-auto-hide-status-bar .status-bar > .status-bar-item {
+  transition:
+    transform 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 320ms cubic-bezier(0.32, 0.72, 0, 1),
+    filter 320ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+body.claude-auto-hide-status-bar
+  .status-bar:not(:hover):not(:focus-within) {
+  height: 4px;
+  min-height: 4px;
+  max-width: 160px;
+  margin-bottom: 2px;
+  padding-block: 0;
+  background-color: color-mix(in srgb, var(--text-muted) 22%, transparent);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+body.claude-auto-hide-status-bar
+  .status-bar:not(:hover):not(:focus-within)
+  > .status-bar-item {
+  opacity: 0;
+  filter: blur(16px);
+  transform: scale(0.9);
+  white-space: nowrap;
+}
+
+body.claude-auto-hide-status-bar .status-bar::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 38px;
+}
+
+body.claude-auto-hide-status-bar .status-bar:hover::before,
+body.claude-auto-hide-status-bar .status-bar:focus-within::before {
+  bottom: -8px;
+}
+
+body.claude-auto-hide-status-bar .status-bar:hover,
+body.claude-auto-hide-status-bar .status-bar:focus-within {
+  height: 30px;
+  min-height: 30px;
+  max-width: 100%;
+  margin-bottom: 8px;
+  padding-block: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.claude-auto-hide-status-bar .status-bar,
+  body.claude-auto-hide-status-bar .status-bar > .status-bar-item {
+    transition-duration: 0ms;
+  }
+}

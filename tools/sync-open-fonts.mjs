@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 const outputDirectory = resolve(root, "assets/fonts/open");
 const licenseDirectory = resolve(root, "assets/fonts/licenses");
 const bundledLicensePath = resolve(root, "assets/fonts/OPEN_FONT_LICENSES.txt");
-const themePath = resolve(root, "theme.css");
+const themePath = resolve(root, "src/_fonts.scss");
 const startMarker = "/* BEGIN GENERATED OPEN FONT FACES */";
 const endMarker = "/* END GENERATED OPEN FONT FACES */";
 

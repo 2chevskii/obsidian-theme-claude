@@ -1,11 +1,16 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { basename, resolve } from "node:path";
+import { resolve } from "node:path";
+import { compile } from "sass";
 
 const root = resolve(import.meta.dirname, "..");
-const outputDirectory = resolve(root, "dist/theme/Claude");
-const sourceCss = await readFile(resolve(root, "theme.css"), "utf8");
+const outputDirectory = resolve(root, "dist/theme");
+const sourceScss = resolve(root, "src/theme.scss");
 const manifest = await readFile(resolve(root, "manifest.json"), "utf8");
 const openFontLicenses = await readFile(resolve(root, "assets/fonts/OPEN_FONT_LICENSES.txt"), "utf8");
+const sourceCss = compile(sourceScss, {
+  sourceMap: false,
+  style: "expanded"
+}).css;
 
 const references = [...sourceCss.matchAll(/url\(["']assets\/fonts\/([^"')]+)["']\)/g)];
 let distributableCss = sourceCss;
@@ -28,7 +33,7 @@ await writeFile(resolve(outputDirectory, "manifest.json"), manifest);
 await writeFile(
   resolve(outputDirectory, "theme.css"),
   [
-    `/* Generated from ${basename(resolve(root, "theme.css"))}; bundled fonts are embedded for Obsidian Releases. */`,
+    "/* Generated from src/theme.scss; bundled fonts are embedded for Obsidian Releases. */",
     `/*\n${openFontLicenses.replaceAll("*/", "* /")}*/`,
     distributableCss
   ].join("\n")

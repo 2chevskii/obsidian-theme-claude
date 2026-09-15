@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import process from "node:process";
+import { compile } from "sass";
 
 const root = resolve(import.meta.dirname, "..");
 const readJson = (path) => JSON.parse(readFileSync(resolve(root, path), "utf8"));
@@ -9,7 +10,10 @@ const failures = [];
 const themeManifest = readJson("manifest.json");
 const themeVersions = readJson("versions.json");
 const rootPackage = readJson("package.json");
-const themeCss = readFileSync(resolve(root, "theme.css"), "utf8");
+const themeCss = compile(resolve(root, "src/theme.scss"), {
+  sourceMap: false,
+  style: "expanded"
+}).css;
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
 const galleryReadme = readFileSync(resolve(root, "assets/screenshots/README.md"), "utf8");
 

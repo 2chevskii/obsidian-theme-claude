@@ -1,0 +1,29 @@
+.graph-view.color-fill {
+  color: var(--interactive-accent);
+}
+
+.graph-view.color-line,
+.graph-view.color-fill-tag,
+.graph-view.color-fill-attachment {
+  color: var(--text-faint);
+}
+
+.kanban-plugin__board,
+.task-list-kanban-board {
+  background: var(--background-primary);
+}
+
+.kanban-plugin__lane,
+.task-list-kanban-column,
+.task-list-kanban-card {
+  background: var(--claude-surface-soft);
+  border-color: var(--background-modifier-border);
+  border-radius: var(--claude-radius-md);
+}
+
+.calendar {
+  --color-background-day-empty: transparent;
+  --color-background-day-active: var(--background-modifier-hover);
+  --color-background-day-hover: var(--background-modifier-hover);
+  --color-dot: var(--interactive-accent);
+}

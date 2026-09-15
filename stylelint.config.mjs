@@ -21,6 +21,7 @@ export default {
     "declaration-no-important": null,
     "keyframe-selector-notation": null,
     "selector-not-notation": null,
-    "media-feature-range-notation": null
+    "media-feature-range-notation": null,
+    "at-rule-no-unknown": [true, { ignoreAtRules: ["use"] }]
   }
 };

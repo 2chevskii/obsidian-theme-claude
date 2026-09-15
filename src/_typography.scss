@@ -1,0 +1,40 @@
+/* Fixed typography. Keep these last so Obsidian's custom-font settings and
+   component-level declarations cannot replace the theme's bundled families. */
+body,
+body .app-container,
+body :is(button, input, textarea, select) {
+  --font-interface: var(--claude-font-interface), system-ui, sans-serif;
+  font-family: var(--claude-font-interface), system-ui, sans-serif;
+}
+
+body :is(
+  .markdown-source-view.mod-cm6 .cm-scroller,
+  .markdown-reading-view,
+  .markdown-rendered
+) {
+  --font-text: var(--claude-font-text), Georgia, serif;
+  font-family: var(--claude-font-text), Georgia, serif;
+}
+
+body :is(
+  .inline-title,
+  .markdown-rendered h1,
+  .markdown-rendered h2,
+  .markdown-rendered h3,
+  .markdown-rendered h4,
+  .markdown-rendered h5,
+  .markdown-rendered h6,
+  .HyperMD-header
+) {
+  font-family: var(--claude-font-headings), Georgia, serif;
+}
+
+body :is(
+  code,
+  pre,
+  .cm-inline-code,
+  .HyperMD-codeblock,
+  .cm-gutterElement
+) {
+  font-family: var(--claude-font-mono), "SFMono-Regular", Consolas, monospace !important;
+}

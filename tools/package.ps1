@@ -6,7 +6,6 @@ param(
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $distRoot = Join-Path $repoRoot "dist"
-$artifactsRoot = Join-Path $repoRoot "artifacts"
 
 if (-not $SkipBuild) {
   Push-Location $repoRoot
@@ -20,37 +19,50 @@ if (-not $SkipBuild) {
 }
 
 $themeManifest = Get-Content -Raw (Join-Path $repoRoot "manifest.json") | ConvertFrom-Json
-$themeSource = Join-Path $distRoot "theme/Claude"
+$themeSource = Join-Path $distRoot "theme"
 
 if (-not (Test-Path -LiteralPath (Join-Path $themeSource "theme.css"))) {
   throw "Built theme is missing. Run npm run build first."
 }
 
-if (Test-Path -LiteralPath $artifactsRoot) {
-  $resolvedArtifacts = (Resolve-Path -LiteralPath $artifactsRoot).Path
-  if (-not $resolvedArtifacts.StartsWith($repoRoot, [StringComparison]::OrdinalIgnoreCase)) {
-    throw "Refusing to remove artifacts outside the repository."
+$archiveName = "Claude-$($themeManifest.version).tar.gz"
+$archivePath = Join-Path $distRoot $archiveName
+$stagingRoot = Join-Path $distRoot ".package-$($themeManifest.version)"
+
+if (Test-Path -LiteralPath $stagingRoot) {
+  $resolvedStaging = (Resolve-Path -LiteralPath $stagingRoot).Path
+  if (-not $resolvedStaging.StartsWith($distRoot, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "Refusing to remove package staging outside dist/."
   }
-  Remove-Item -LiteralPath $resolvedArtifacts -Recurse -Force
+  Remove-Item -LiteralPath $resolvedStaging -Recurse -Force
 }
 
-New-Item -ItemType Directory -Path $artifactsRoot, (Join-Path $artifactsRoot "theme") | Out-Null
+New-Item -ItemType Directory -Path $stagingRoot | Out-Null
 
-Copy-Item -LiteralPath (Join-Path $themeSource "manifest.json") -Destination (Join-Path $artifactsRoot "theme") -Force
-Copy-Item -LiteralPath (Join-Path $themeSource "theme.css") -Destination (Join-Path $artifactsRoot "theme") -Force
+try {
+  Copy-Item -LiteralPath (Join-Path $themeSource "manifest.json") -Destination (Join-Path $stagingRoot "manifest.json")
+  Copy-Item -LiteralPath (Join-Path $themeSource "theme.css") -Destination (Join-Path $stagingRoot "theme.css")
+  Copy-Item -LiteralPath (Join-Path $repoRoot "README.md") -Destination (Join-Path $stagingRoot "README.md")
+  Copy-Item -LiteralPath (Join-Path $repoRoot "LICENSE") -Destination (Join-Path $stagingRoot "LICENSE")
+  Copy-Item -LiteralPath (Join-Path $repoRoot "assets/fonts/licenses") -Destination (Join-Path $stagingRoot "font-licenses") -Recurse
 
-$themeArchive = Join-Path $artifactsRoot "claude-theme-$($themeManifest.version).zip"
-Compress-Archive -LiteralPath $themeSource -DestinationPath $themeArchive -CompressionLevel Optimal
+  & tar -czf $archivePath -C $stagingRoot theme.css manifest.json README.md LICENSE font-licenses
+  if ($LASTEXITCODE -ne 0) { throw "tar failed with exit code $LASTEXITCODE." }
 
-$checksumLines = Get-ChildItem -LiteralPath $artifactsRoot -File -Filter "*.zip" |
-  Sort-Object Name |
-  ForEach-Object {
-    $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()
-    "$hash  $($_.Name)"
+  $archiveEntries = & tar -tzf $archivePath
+  if ($LASTEXITCODE -ne 0) { throw "tar validation failed with exit code $LASTEXITCODE." }
+  $requiredEntries = @("theme.css", "manifest.json", "README.md", "LICENSE", "font-licenses/")
+  foreach ($entry in $requiredEntries) {
+    if ($archiveEntries -notcontains $entry) { throw "Archive is missing $entry." }
   }
-Set-Content -LiteralPath (Join-Path $artifactsRoot "SHA256SUMS.txt") -Value $checksumLines -Encoding utf8NoBOM
+}
+finally {
+  if (Test-Path -LiteralPath $stagingRoot) {
+    Remove-Item -LiteralPath $stagingRoot -Recurse -Force
+  }
+}
 
 Write-Output "Created release artifacts:"
-Get-ChildItem -LiteralPath $artifactsRoot -Recurse -File | ForEach-Object {
-  Write-Output "- $($_.FullName.Substring($repoRoot.Length + 1))"
-}
+Write-Output "- dist/theme/manifest.json"
+Write-Output "- dist/theme/theme.css"
+Write-Output "- dist/$archiveName"

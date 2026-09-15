@@ -37,9 +37,11 @@ npm run build
 npm run package
 ```
 
-`npm run package` writes a ZIP archive and checksums to `artifacts/`; `npm run
-clean` removes `dist/` and `artifacts/`. The distributable CSS embeds bundled
-WOFF2 files so the release is self-contained.
+`npm run build` writes `theme.css` and `manifest.json` to `dist/theme/`.
+`npm run package` additionally writes `Claude-<version>.tar.gz` to `dist/`.
+The archive contains the distributable theme, README, MIT license, and the
+individual font licenses. `npm run clean` removes `dist/`. The distributable
+CSS embeds bundled WOFF2 files so the release is self-contained.
 
 ### Screenshot gallery
 
@@ -55,7 +57,8 @@ should be installed for the settings screenshot.
 
 ## Repository layout
 
-- `theme.css`, `manifest.json`, `versions.json` — theme source and release metadata.
+- `src/` — modular SCSS source, with `theme.scss` as the build entrypoint.
+- `manifest.json`, `versions.json` — release metadata.
 - `assets/fonts/` — local WOFF2 resources embedded at build time.
 - `tools/` — validation, build, package, font, and gallery automation.
 - `assets/screenshots/` — generated gallery and community-directory thumbnail.

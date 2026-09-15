@@ -34,18 +34,19 @@ jobs:
             throw "Tag $env:GITHUB_REF_NAME must match theme version $($manifest.version)."
           }
 
-      - name: Run checks and build theme
+      - name: Run checks and package theme
         shell: pwsh
         run: |
           npm run check
-          npm run build
+          npm run package
 
       - name: Attest release assets
         uses: actions/attest-build-provenance@8beda2b7ed98355c0e97c0a63bec38ae472e66c4 # v4
         with:
           subject-path: |
-            dist/theme/Claude/manifest.json
-            dist/theme/Claude/theme.css
+            dist/theme/manifest.json
+            dist/theme/theme.css
+            dist/Claude-*.tar.gz
 
       - name: Create draft release
         env:
@@ -56,5 +57,6 @@ jobs:
             --verify-tag `
             --title "Claude $env:GITHUB_REF_NAME" `
             --draft `
-            dist/theme/Claude/manifest.json `
-            dist/theme/Claude/theme.css
+            dist/theme/manifest.json `
+            dist/theme/theme.css `
+            dist/Claude-$env:GITHUB_REF_NAME.tar.gz
