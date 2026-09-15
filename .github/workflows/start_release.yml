@@ -11,7 +11,22 @@ permissions:
   attestations: write
 
 jobs:
-  release:
+  validate_release_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Validate release tag
+        shell: pwsh
+        run: |
+          $manifest = Get-Content -Raw manifest.json | ConvertFrom-Json
+          if ($env:GITHUB_REF_NAME -ne $manifest.version) {
+            throw "Tag $env:GITHUB_REF_NAME must match theme version $($manifest.version)."
+          }
+
+  validate_theme:
+    needs: validate_release_tag
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -26,19 +41,47 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate release tag
-        shell: pwsh
-        run: |
-          $manifest = Get-Content -Raw manifest.json | ConvertFrom-Json
-          if ($env:GITHUB_REF_NAME -ne $manifest.version) {
-            throw "Tag $env:GITHUB_REF_NAME must match theme version $($manifest.version)."
-          }
+      - name: Run checks
+        run: npm run check
 
-      - name: Run checks and package theme
-        shell: pwsh
-        run: |
-          npm run check
-          npm run package
+  package_theme:
+    needs: validate_theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package theme
+        run: npm run package
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@v6
+        with:
+          name: release-assets
+          path: |
+            dist/theme/
+            dist/Claude-*.tar.gz
+          if-no-files-found: error
+          compression-level: 0
+
+  attest_release_assets:
+    needs: package_theme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release assets
+        uses: actions/download-artifact@v5
+        with:
+          name: release-assets
+          path: dist
 
       - name: Attest release assets
         uses: actions/attest-build-provenance@v4
@@ -47,6 +90,16 @@ jobs:
             dist/theme/manifest.json
             dist/theme/theme.css
             dist/Claude-*.tar.gz
+
+  create_draft_release:
+    needs: attest_release_assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release assets
+        uses: actions/download-artifact@v5
+        with:
+          name: release-assets
+          path: dist
 
       - name: Create draft release
         env:
