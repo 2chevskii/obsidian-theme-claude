@@ -1,3 +1,5 @@
+@use "tokens" as *;
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -20,7 +22,7 @@
   background-clip: padding-box;
 }
 
-@media (max-width: 700px) {
+@media (max-width: $claude-mobile-breakpoint) {
   :root {
     --file-line-width: 100%;
   }
@@ -41,9 +43,8 @@
   *::before,
   *::after {
     scroll-behavior: auto;
-    transition-duration: 0.01ms;
-    animation-duration: 0.01ms;
+    transition-duration: $claude-reduced-motion-duration;
+    animation-duration: $claude-reduced-motion-duration;
     animation-iteration-count: 1;
   }
 }
-

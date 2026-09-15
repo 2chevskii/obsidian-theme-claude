@@ -1,3 +1,5 @@
+@use "tokens" as *;
+
 :root {
   --claude-font-interface: "Claude Geist Sans";
   --claude-font-text: "Claude Lora";
@@ -30,10 +32,10 @@
   --metadata-label-width: 9em;
   --metadata-gap: 4px;
   --nav-item-size: 14px;
-  --nav-item-weight: 400;
-  --nav-item-weight-active: 500;
+  --nav-item-weight: #{$claude-font-weight-regular};
+  --nav-item-weight-active: #{$claude-font-weight-medium};
   --tab-font-size: 13px;
-  --tab-font-weight: 400;
+  --tab-font-weight: #{$claude-font-weight-regular};
   --titlebar-background: var(--background-secondary);
   --titlebar-background-focused: var(--background-secondary);
   --titlebar-border-width: 0px;

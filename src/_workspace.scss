@@ -1,6 +1,8 @@
+@use "tokens" as *;
+
 body {
   font-family: var(--claude-font-interface), system-ui, sans-serif;
-  font-variation-settings: "wght" 400;
+  font-variation-settings: "wght" $claude-font-weight-regular;
   letter-spacing: 0;
 }
 
@@ -80,7 +82,7 @@ body {
   border: 0;
   border-radius: var(--claude-radius-xs);
   box-shadow: none;
-  transition: color 120ms ease, background-color 120ms ease;
+  transition: color $claude-transition-fast ease, background-color $claude-transition-fast ease;
 }
 
 .mod-sidedock .workspace-tab-header-inner {
@@ -158,8 +160,8 @@ body {
   border-radius: var(--claude-radius-sm);
   box-shadow: 0 1px 0 rgb(11 11 11 / 5%);
   transform: translateY(-1px);
-  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
-    transform 120ms ease;
+  transition: background-color $claude-transition-fast ease, border-color $claude-transition-fast ease, box-shadow $claude-transition-fast ease,
+    transform $claude-transition-fast ease;
 }
 
 .workspace-split.mod-root .workspace-tab-header:hover {
@@ -247,19 +249,19 @@ body {
   color: var(--text-muted);
   background: transparent;
   transition:
-    color 120ms ease,
-    width 160ms ease,
-    height 160ms ease,
-    min-width 160ms ease,
-    min-height 160ms ease;
+    color $claude-transition-fast ease,
+    width $claude-transition-medium ease,
+    height $claude-transition-medium ease,
+    min-width $claude-transition-medium ease,
+    min-height $claude-transition-medium ease;
 }
 
 .workspace-leaf-content[data-type="file-explorer"] .nav-action-button > svg {
   opacity: 0;
   transform: scale(0.25);
   transition:
-    opacity 120ms ease,
-    transform 160ms ease;
+    opacity $claude-transition-fast ease,
+    transform $claude-transition-medium ease;
 }
 
 .workspace-leaf-content[data-type="file-explorer"] .nav-action-button::after {
@@ -270,8 +272,8 @@ body {
   border-radius: 50%;
   content: "";
   transition:
-    opacity 100ms ease,
-    transform 160ms ease;
+    opacity $claude-transition-quick ease,
+    transform $claude-transition-medium ease;
 }
 
 .workspace-leaf-content[data-type="file-explorer"] .nav-header:is(:hover, :focus-within) .nav-action-button {
@@ -337,8 +339,8 @@ body {
 }
 
 .view-header-title {
-  font-weight: 500;
-  font-variation-settings: "wght" 500;
+  font-weight: $claude-font-weight-medium;
+  font-variation-settings: "wght" $claude-font-weight-medium;
 }
 
 .titlebar,
@@ -368,8 +370,8 @@ body {
   border-radius: 6px;
   justify-content: center;
   transition:
-    color 120ms ease,
-    background-color 120ms ease;
+    color $claude-transition-fast ease,
+    background-color $claude-transition-fast ease;
 }
 
 .titlebar-button-container.mod-right .titlebar-button > svg {
@@ -377,8 +379,8 @@ body {
   height: 11px;
   opacity: 0.72;
   transition:
-    opacity 120ms ease,
-    transform 120ms ease;
+    opacity $claude-transition-fast ease,
+    transform $claude-transition-fast ease;
 }
 
 .titlebar-button-container.mod-right .titlebar-button:hover {
@@ -400,4 +402,3 @@ body {
   color: var(--text-on-accent);
   background: var(--interactive-accent);
 }
-

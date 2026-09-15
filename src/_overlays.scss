@@ -1,6 +1,8 @@
+@use "tokens" as *;
+
 .modal-container .modal-bg {
   background: var(--claude-modal-backdrop);
-  animation: claude-modal-backdrop-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: claude-modal-backdrop-in $claude-animation-backdrop $claude-ease-backdrop both;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
@@ -31,13 +33,13 @@
 body:not(.is-mobile) .modal,
 body:not(.is-mobile) .modal-container > .prompt {
   transform-origin: center;
-  animation: claude-modal-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: claude-modal-in $claude-animation-modal $claude-ease-emphasized both;
 }
 
 body:not(.is-mobile) > .menu,
 body:not(.is-mobile) > .suggestion-container {
   transform-origin: center top;
-  animation: claude-menu-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: claude-menu-in $claude-animation-menu $claude-ease-emphasized both;
 }
 
 @keyframes claude-modal-in {
@@ -100,8 +102,8 @@ body:not(.is-mobile) > .suggestion-container {
   border-radius: var(--claude-radius-lg);
   box-shadow: var(--claude-shadow-sm);
   transition:
-    border-color 140ms ease,
-    box-shadow 140ms ease;
+    border-color $claude-transition-control ease,
+    box-shadow $claude-transition-control ease;
 }
 
 .prompt-input-container:focus-within {
@@ -208,7 +210,7 @@ body:not(.is-mobile) > .suggestion-container {
   color: var(--text-muted);
   font-family: var(--claude-font-mono), monospace;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: $claude-font-weight-medium;
 }
 
 .suggestion-item,

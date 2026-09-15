@@ -13,7 +13,7 @@
     "sync:fonts": "node tools/sync-open-fonts.mjs",
     "check": "npm run check:metadata && npm run lint:theme",
     "check:metadata": "node tools/check-metadata.mjs",
-    "lint:theme": "stylelint \"src/**/*.scss\"",
+    "lint:theme": "node tools/lint-theme.mjs",
     "package": "pwsh -NoProfile -File tools/package.ps1"
   },
   "devDependencies": {

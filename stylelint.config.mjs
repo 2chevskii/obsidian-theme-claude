@@ -22,6 +22,14 @@ export default {
     "keyframe-selector-notation": null,
     "selector-not-notation": null,
     "media-feature-range-notation": null,
-    "at-rule-no-unknown": [true, { ignoreAtRules: ["use"] }]
+
+    // Dart Sass normalizes the compiled distribution without changing behavior.
+    "at-rule-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "selector-attribute-quotes": null,
+    "color-function-alias-notation": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null
   }
 };
