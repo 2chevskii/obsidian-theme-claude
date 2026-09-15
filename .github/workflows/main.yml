@@ -46,8 +46,7 @@ jobs:
         with:
           name: claude-theme
           path: |
-            artifacts/theme/
-            artifacts/claude-theme-*.zip
-            artifacts/SHA256SUMS.txt
+            dist/theme/
+            dist/Claude-*.tar.gz
           if-no-files-found: error
           compression-level: 0
