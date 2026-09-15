@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        uses: actions/checkout@v7
 
       - name: Lint GitHub Actions workflows
         uses: docker://rhysd/actionlint:1.7.12
@@ -23,7 +23,7 @@ jobs:
           args: -color
 
       - name: Use Node.js 24
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -42,7 +42,7 @@ jobs:
         run: ./tools/package.ps1 -SkipBuild
 
       - name: Upload theme package
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        uses: actions/upload-artifact@v6
         with:
           name: claude-theme
           path: |
