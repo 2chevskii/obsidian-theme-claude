@@ -3,10 +3,10 @@
 ## Project Structure & Module Organization
 
 `theme.css` is the theme source; `manifest.json` and `versions.json` contain
-Obsidian release metadata. `fonts/` holds local WOFF2 files and licenses that
+Obsidian release metadata. `assets/fonts/` holds local WOFF2 files and licenses that
 are embedded into the distributable CSS. Automation is in `tools/`, with the
 gallery fixture and generator under `tools/gallery/`. Generated screenshots are
-in `screenshots/`; package outputs are ignored in `artifacts/`.
+in `assets/screenshots/`; package outputs are ignored in `artifacts/`.
 
 ## Build, Check, and Development Commands
 

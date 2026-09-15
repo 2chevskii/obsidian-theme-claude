@@ -11,7 +11,7 @@ const themeVersions = readJson("versions.json");
 const rootPackage = readJson("package.json");
 const themeCss = readFileSync(resolve(root, "theme.css"), "utf8");
 const readme = readFileSync(resolve(root, "README.md"), "utf8");
-const galleryReadme = readFileSync(resolve(root, "screenshots/README.md"), "utf8");
+const galleryReadme = readFileSync(resolve(root, "assets/screenshots/README.md"), "utf8");
 
 const check = (condition, message) => {
   if (!condition) failures.push(message);
@@ -35,11 +35,11 @@ for (const family of ["Claude Geist Sans", "Claude Lora", "Claude Literata", "Cl
   check(themeCss.includes(family), `Fixed font family is missing: ${family}.`);
 }
 
-const fontReferences = [...themeCss.matchAll(/url\(["']fonts\/([^"')]+)["']\)/g)]
+const fontReferences = [...themeCss.matchAll(/url\(["']assets\/fonts\/([^"')]+)["']\)/g)]
   .map((match) => match[1]);
 check(fontReferences.length > 0, "theme.css does not reference bundled fonts.");
 for (const file of new Set(fontReferences)) {
-  check(existsSync(resolve(root, "fonts", file)), `Missing font file: fonts/${file}`);
+  check(existsSync(resolve(root, "assets/fonts", file)), `Missing font file: assets/fonts/${file}`);
 }
 
 for (const requiredScreenshot of [
@@ -54,15 +54,15 @@ for (const requiredScreenshot of [
   "theme-thumbnail.png"
 ]) {
   check(
-    existsSync(resolve(root, "screenshots", requiredScreenshot)),
-    `Missing generated screenshot: screenshots/${requiredScreenshot}`
+    existsSync(resolve(root, "assets/screenshots", requiredScreenshot)),
+    `Missing generated screenshot: assets/screenshots/${requiredScreenshot}`
   );
 }
-check(readme.includes("screenshots/overview-light.png"), "README is missing the light overview image.");
-check(readme.includes("screenshots/overview-dark.png"), "README is missing the dark overview image.");
-check(readme.includes("screenshots/README.md"), "README is missing the full gallery link.");
+check(readme.includes("assets/screenshots/overview-light.png"), "README is missing the light overview image.");
+check(readme.includes("assets/screenshots/overview-dark.png"), "README is missing the dark overview image.");
+check(readme.includes("assets/screenshots/README.md"), "README is missing the full gallery link.");
 for (const match of galleryReadme.matchAll(/!\[[^\]]*\]\(([^)]+\.png)\)/g)) {
-  check(existsSync(resolve(root, "screenshots", match[1])), `Broken gallery image link: ${match[1]}`);
+  check(existsSync(resolve(root, "assets/screenshots", match[1])), `Broken gallery image link: ${match[1]}`);
 }
 
 for (const [name, version] of Object.entries(rootPackage.devDependencies ?? {})) {

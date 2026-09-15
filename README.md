@@ -9,9 +9,9 @@ This project is not affiliated with or endorsed by Anthropic or Obsidian.
 
 | Light | Dark |
 | --- | --- |
-| ![Claude theme in light mode](screenshots/overview-light.png) | ![Claude theme in dark mode](screenshots/overview-dark.png) |
+| ![Claude theme in light mode](assets/screenshots/overview-light.png) | ![Claude theme in dark mode](assets/screenshots/overview-dark.png) |
 
-[Open the full screenshot gallery](screenshots/README.md).
+[Open the full screenshot gallery](assets/screenshots/README.md).
 
 ## Installation
 
@@ -56,9 +56,9 @@ should be installed for the settings screenshot.
 ## Repository layout
 
 - `theme.css`, `manifest.json`, `versions.json` — theme source and release metadata.
-- `fonts/` — local WOFF2 resources embedded at build time.
+- `assets/fonts/` — local WOFF2 resources embedded at build time.
 - `tools/` — validation, build, package, font, and gallery automation.
-- `screenshots/` — generated gallery and community-directory thumbnail.
+- `assets/screenshots/` — generated gallery and community-directory thumbnail.
 
 ## Releases
 
@@ -70,6 +70,6 @@ notes and publish the draft; Obsidian then downloads `manifest.json` and
 
 ## License
 
-Theme code is available under the MIT License. Files in `fonts/` are
+Theme code is available under the MIT License. Files in `assets/fonts/` are
 distributed under the SIL Open Font License 1.1; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

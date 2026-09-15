@@ -4,9 +4,9 @@ import { dirname, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
-const outputDirectory = resolve(root, "fonts/open");
-const licenseDirectory = resolve(root, "fonts/licenses");
-const bundledLicensePath = resolve(root, "fonts/OPEN_FONT_LICENSES.txt");
+const outputDirectory = resolve(root, "assets/fonts/open");
+const licenseDirectory = resolve(root, "assets/fonts/licenses");
+const bundledLicensePath = resolve(root, "assets/fonts/OPEN_FONT_LICENSES.txt");
 const themePath = resolve(root, "theme.css");
 const startMarker = "/* BEGIN GENERATED OPEN FONT FACES */";
 const endMarker = "/* END GENERATED OPEN FONT FACES */";
@@ -56,7 +56,7 @@ for (const [id, packageName, familyName, cssFiles] of variableFamilies) {
 
       const face = match[2]
         .replace(/font-family:\s*'[^']+';/, `font-family: "${familyName}";`)
-        .replace(/src:[^;]+;/, `src: url("fonts/open/${fontFile}") format("woff2");`)
+        .replace(/src:[^;]+;/, `src: url("assets/fonts/open/${fontFile}") format("woff2");`)
         .replaceAll("format('woff2-variations')", 'format("woff2")');
       generatedFaces.push(`/* ${id}: ${sourceName} */\n${face}`);
     }

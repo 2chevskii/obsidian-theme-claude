@@ -3,7 +3,7 @@ param(
   [Parameter(Mandatory)]
   [string]$VaultName,
 
-  [string]$OutputDirectory = (Join-Path $PSScriptRoot "../../screenshots"),
+  [string]$OutputDirectory = (Join-Path $PSScriptRoot "../../assets/screenshots"),
 
   [switch]$KeepFixture
 )
@@ -192,7 +192,7 @@ try {
   Copy-Item -LiteralPath $themeCssSource -Destination (Join-Path $themeTarget "theme.css") -Force
   Copy-Item -LiteralPath $themeManifestSource -Destination (Join-Path $themeTarget "manifest.json") -Force
   if ($themeCssSource -eq (Join-Path $repoRoot "theme.css")) {
-    Copy-Item -LiteralPath (Join-Path $repoRoot "fonts") -Destination $themeTarget -Recurse -Force
+    Copy-Item -LiteralPath (Join-Path $repoRoot "assets/fonts") -Destination $themeTarget -Recurse -Force
   }
   Copy-Item -LiteralPath (Join-Path $repoRoot "tools/gallery/showcase.md") -Destination $fixtureTarget -Force
   $fixtureCreated = $true
