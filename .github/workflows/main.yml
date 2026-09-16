@@ -10,7 +10,7 @@ jobs:
           cache: npm
           node-version-file: package.json
       - run: npm ci
-      - run: npm run check
+      - run: npm run lint
 
   build:
     needs: lint
