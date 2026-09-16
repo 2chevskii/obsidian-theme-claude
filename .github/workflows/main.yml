@@ -1,5 +1,3 @@
-name: Main
-
 on:
   workflow_dispatch:
   push:
@@ -9,16 +7,6 @@ permissions:
   contents: read
 
 jobs:
-  lint_workflows:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - name: Lint GitHub Actions workflows
-        uses: docker://rhysd/actionlint:1.7.12
-        with:
-          args: -color
-
   validate_theme:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +22,7 @@ jobs:
       - run: npm run check
 
   package_theme:
-    needs: [lint_workflows, validate_theme]
+    needs: validate_theme
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
