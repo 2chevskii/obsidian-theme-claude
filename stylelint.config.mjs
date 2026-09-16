@@ -1,5 +1,5 @@
 export default {
-  extends: ["stylelint-config-obsidianmd"],
+  extends: ["stylelint-config-obsidianmd", "stylelint-config-standard-scss"],
   rules: {
     // Obsidian and CodeMirror expose mixed-case and BEM-like class names.
     "selector-class-pattern": null,
