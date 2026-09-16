@@ -26,7 +26,7 @@ deterministic [`tools/gallery/showcase.md`](../tools/gallery/showcase.md) fixtur
 
 ### Style Settings
 
-![Claude Style Settings](style-settings-light.png)
+![Claude.md Style Settings](style-settings-light.png)
 
 ### Expanded status bar
 

@@ -1,6 +1,10 @@
 # Changelog
 
-All notable changes to the Claude theme are documented here.
+All notable changes to the Claude.md theme are documented here.
+
+## 1.0.1
+
+- Renamed the theme to Claude.md.
 
 ## 1.0.0
 

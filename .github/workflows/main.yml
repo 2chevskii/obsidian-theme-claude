@@ -26,9 +26,9 @@ jobs:
       - id: get-version
         run: echo "theme-version=$(jq -r '.version' manifest.json)" >> "$GITHUB_OUTPUT"
       - run: |
-          tar -czf "Claude_${{ steps.get-version.outputs.theme-version }}.tar.gz" -C dist theme.css manifest.json
+          tar -czf "Claude.md_${{ steps.get-version.outputs.theme-version }}.tar.gz" -C dist theme.css manifest.json
       - uses: actions/upload-artifact@v7
         with:
-          path: Claude_${{ steps.get-version.outputs.theme-version }}.tar.gz
+          path: Claude.md_${{ steps.get-version.outputs.theme-version }}.tar.gz
           archive: false
           if-no-files-found: error

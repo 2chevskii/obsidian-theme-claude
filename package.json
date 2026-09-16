@@ -1,8 +1,8 @@
 {
-  "name": "obsidian-theme-claude",
-  "version": "1.0.0",
+  "name": "obsidian-theme-claude-md",
+  "version": "1.0.1",
   "private": true,
-  "description": "An unofficial Claude-inspired theme for Obsidian.",
+  "description": "Claude.md, an unofficial Claude-inspired theme for Obsidian.",
   "type": "module",
   "engines": {
     "node": "24"

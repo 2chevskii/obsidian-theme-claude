@@ -14,7 +14,7 @@ Use Node.js 24 (`.nvmrc`), npm, and PowerShell 7.
 
 - `npm ci` installs the locked dependencies.
 - `npm run check` validates metadata and lints `theme.css`.
-- `npm run build` creates `dist/theme/Claude/` with release-ready CSS.
+- `npm run build` creates the release-ready `dist/theme.css` and `dist/manifest.json` files for Claude.md.
 - `npm run package` creates the theme ZIP and SHA-256 checksum.
 - `npm run clean` removes `dist/` and `artifacts/`.
 - `pwsh -NoProfile -File tools/gallery/generate-gallery.ps1 -VaultName "My Vault"` refreshes screenshots.

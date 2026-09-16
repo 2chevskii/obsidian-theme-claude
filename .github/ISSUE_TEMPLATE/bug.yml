@@ -9,7 +9,7 @@ body:
       label: Component
       options:
         - Theme
-        - Claude Theme Companion
+        - Claude.md Theme Companion
         - Packaging or gallery tooling
     validations:
       required: true

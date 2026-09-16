@@ -1,6 +1,6 @@
-# Claude for Obsidian
+# Claude.md for Obsidian
 
-A calmer place to read and write. An unofficial theme inspired by Claude,
+A calmer place to read and write. Claude.md is an unofficial theme inspired by Claude,
 with soft colors, serif typography, and a little more breathing room.
 
 [![Latest release](https://img.shields.io/github/v/release/2chevskii/obsidian-theme-claude?color=c96442)](https://github.com/2chevskii/obsidian-theme-claude/releases/latest)
@@ -12,7 +12,7 @@ with soft colors, serif typography, and a little more breathing room.
 
 | Light | Dark |
 | --- | --- |
-| ![Claude theme in light mode](assets/screenshots/overview-light.png) | ![Claude theme in dark mode](assets/screenshots/overview-dark.png) |
+| ![Claude.md theme in light mode](assets/screenshots/overview-light.png) | ![Claude.md theme in dark mode](assets/screenshots/overview-dark.png) |
 
 ## Make yourself at home
 
@@ -25,18 +25,18 @@ with soft colors, serif typography, and a little more breathing room.
 Requires **Obsidian 1.10.6 or newer**.
 
 1. Open [Releases](https://github.com/2chevskii/obsidian-theme-claude/releases) and download **`theme.css`** and **`manifest.json`** from the latest release's **Assets**. If no release is available, [build the theme from source](#contribute) and use the files in `dist/`.
-2. Create a `Claude` folder inside your vault's `.obsidian/themes/` directory and place both files there:
+2. Create a `Claude.md` folder inside your vault's `.obsidian/themes/` directory and place both files there:
 
    ```text
    Your vault/
    └── .obsidian/
        └── themes/
-           └── Claude/
+           └── Claude.md/
                ├── manifest.json
                └── theme.css
    ```
 
-3. In Obsidian, open **Settings → Appearance → Themes** and select **Claude**.
+3. In Obsidian, open **Settings → Appearance → Themes** and select **Claude.md**.
 
 If your vault uses a custom configuration folder, use that in place of `.obsidian`.
 To update a manual installation, replace both files with those from the latest release.
@@ -47,7 +47,7 @@ Choose light or dark mode in **Settings → Appearance**.
 
 For a few extra controls, install and enable the optional
 [Style Settings](https://github.com/community-archive/obsidian-style-settings)
-community plugin. Open its settings and find **Claude** to:
+community plugin. Open its settings and find **Claude.md** to:
 
 - Switch the light palette between **Default** and **Warm**.
 - Automatically hide the status bar until you hover near the bottom center of the window.
