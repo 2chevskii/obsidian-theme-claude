@@ -5,11 +5,11 @@
   "description": "An unofficial Claude-inspired theme for Obsidian.",
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": "24"
   },
   "scripts": {
     "build": "vite build",
-    "lint": "stylelint \"src/**/*.scss\""
+    "lint": "stylelint src/"
   },
   "devDependencies": {
     "@fontsource-variable/geist": "5.3.0",

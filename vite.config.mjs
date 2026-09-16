@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
 
@@ -12,6 +13,12 @@ function themeOutput() {
   return {
     enforce: "post",
     generateBundle(_, bundle) {
+      this.emitFile({
+        fileName: "manifest.json",
+        source: readFileSync(resolve(root, "manifest.json")),
+        type: "asset"
+      });
+
       for (const [fileName, file] of Object.entries(bundle)) {
         if (file.type === "chunk" && file.isEntry && file.code.trim() === "") {
           delete bundle[fileName];

@@ -1,3 +1,4 @@
+/** @type {import('stylelint').Config} */
 export default {
   extends: ["stylelint-config-obsidianmd", "stylelint-config-standard-scss"],
   rules: {
@@ -31,5 +32,6 @@ export default {
     "color-function-alias-notation": null,
     "color-function-notation": null,
     "alpha-value-notation": null
-  }
+  },
+  ignoreFiles: 'src/theme-entry.mjs'
 };
