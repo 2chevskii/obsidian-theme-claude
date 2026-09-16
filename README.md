@@ -3,12 +3,12 @@
 A calmer place to read and write. Claude.md is an unofficial theme inspired by Claude,
 with soft colors, serif typography, and a little more breathing room.
 
-[![Latest release](https://img.shields.io/github/v/release/2chevskii/obsidian-theme-claude?color=c96442)](https://github.com/2chevskii/obsidian-theme-claude/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/2chevskii/obsidian-theme-claudemd?color=c96442)](https://github.com/2chevskii/obsidian-theme-claudemd/releases/latest)
 [![Obsidian 1.10.6+](https://img.shields.io/badge/Obsidian-1.10.6%2B-7c3aed)](https://obsidian.md)
-[![Build](https://github.com/2chevskii/obsidian-theme-claude/actions/workflows/main.yml/badge.svg)](https://github.com/2chevskii/obsidian-theme-claude/actions/workflows/main.yml)
-[![MIT License](https://img.shields.io/github/license/2chevskii/obsidian-theme-claude?color=c96442)](LICENSE)
+[![Build](https://github.com/2chevskii/obsidian-theme-claudemd/actions/workflows/main.yml/badge.svg)](https://github.com/2chevskii/obsidian-theme-claudemd/actions/workflows/main.yml)
+[![MIT License](https://img.shields.io/github/license/2chevskii/obsidian-theme-claudemd?color=c96442)](LICENSE)
 
-[Install](#install) · [Customize](#customize) · [Screenshot gallery](assets/screenshots/README.md) · [Report an issue](https://github.com/2chevskii/obsidian-theme-claude/issues)
+[Install](#install) · [Customize](#customize) · [Screenshot gallery](assets/screenshots/README.md) · [Report an issue](https://github.com/2chevskii/obsidian-theme-claudemd/issues)
 
 | Light | Dark |
 | --- | --- |
@@ -24,7 +24,7 @@ with soft colors, serif typography, and a little more breathing room.
 
 Requires **Obsidian 1.10.6 or newer**.
 
-1. Open [Releases](https://github.com/2chevskii/obsidian-theme-claude/releases) and download **`theme.css`** and **`manifest.json`** from the latest release's **Assets**. If no release is available, [build the theme from source](#contribute) and use the files in `dist/`.
+1. Open [Releases](https://github.com/2chevskii/obsidian-theme-claudemd/releases) and download **`theme.css`** and **`manifest.json`** from the latest release's **Assets**.
 2. Create a `Claude.md` folder inside your vault's `.obsidian/themes/` directory and place both files there:
 
    ```text
@@ -55,7 +55,7 @@ community plugin. Open its settings and find **Claude.md** to:
 
 ## Contribute
 
-Found something that looks off? [Open an issue](https://github.com/2chevskii/obsidian-theme-claude/issues)
+Found something that looks off? [Open an issue](https://github.com/2chevskii/obsidian-theme-claudemd/issues)
 with a screenshot, your Obsidian version, and the theme mode you're using.
 Pull requests are welcome too.
 
