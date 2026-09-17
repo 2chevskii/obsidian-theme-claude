@@ -1,0 +1,44 @@
+name: Refresh gallery
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-gallery-master
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          cache: npm
+          node-version-file: package.json
+      - run: npm ci
+      - run: npm run gallery
+      - run: npm run gallery:verify
+      - name: Commit refreshed screenshots
+        shell: bash
+        run: |
+          git fetch origin master
+          if [[ "$(git rev-parse origin/master)" != "$GITHUB_SHA" ]]; then
+            echo "A newer master commit exists; its workflow will refresh the gallery."
+            exit 0
+          fi
+
+          if [[ -z "$(git status --porcelain -- assets/screenshots)" ]]; then
+            echo "Gallery is current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/screenshots
+          git commit -m "chore: refresh gallery"
+          git push origin HEAD:master
