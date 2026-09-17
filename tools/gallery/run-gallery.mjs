@@ -19,7 +19,7 @@ await rm(staged, { force: true, recursive: true });
 await mkdir(staged, { recursive: true });
 await run("docker", ["build", "--platform", "linux/amd64", "--tag", "claudemd-gallery-renderer", "--file", "tools/gallery/Dockerfile", "."]);
 await run("docker", [
-  "run", "--rm", "--platform", "linux/amd64",
+  "run", "--rm", "--platform", "linux/amd64", "--shm-size=1g",
   "--mount", `type=bind,src=${resolve(root, "dist")},dst=/workspace/dist,readonly`,
   "--mount", `type=bind,src=${staged},dst=/gallery/staged`,
   "claudemd-gallery-renderer"
