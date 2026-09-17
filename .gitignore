@@ -4,3 +4,5 @@ artifacts/
 *.log
 .DS_Store
 Thumbs.db
+.gallery-staged/
+tools/gallery/locked/

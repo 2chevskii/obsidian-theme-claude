@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "platform": "linux/amd64",
+  "docker": {
+    "image": "node:24-bookworm",
+    "digest": "sha256:6dac556d980b7f0e5498d08f08cee0ca67798b4ad6c23964a9214920e67758d0"
+  },
+  "obsidian": {
+    "appVersion": "1.10.6",
+    "installerVersion": "1.10.6",
+    "app": {
+      "cacheFile": "obsidian-app/obsidian-1.10.6.asar",
+      "sourceUrl": "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.10.6/obsidian-1.10.6.asar.gz",
+      "sha256": "781ad0bee8ae0ce82c89eec021d3c22c2c2ce847e4f6486b2041e09c6e5af325"
+    },
+    "installer": {
+      "sourceUrl": "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.10.6/Obsidian-1.10.6.AppImage",
+      "sha256": "162d753076d0610e4dccfdccf391c13af5fcb557ba7574b77f0e90ac3c522b1c"
+    }
+  },
+  "styleSettings": {
+    "id": "obsidian-style-settings",
+    "version": "1.0.9",
+    "assets": {
+      "main.js": {
+        "url": "https://github.com/community-archive/obsidian-style-settings/releases/download/1.0.9/main.js",
+        "sha256": "1828abaacdab4c5578b705a625c585b30512f8efad4c7cfc5a18e70cc3557468"
+      },
+      "manifest.json": {
+        "url": "https://github.com/community-archive/obsidian-style-settings/releases/download/1.0.9/manifest.json",
+        "sha256": "9cffdc20cf2aa1354820e0050b694b0f9b576446e3d5d44a36ae8b0187e5bfb8"
+      }
+    }
+  },
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "scenarios": [
+    "overview-light",
+    "overview-warm",
+    "overview-dark",
+    "rich-markdown-light",
+    "properties-light",
+    "live-preview-headings-light",
+    "quick-switcher-light",
+    "command-palette-dark",
+    "style-settings-light",
+    "status-bar-light",
+    "theme-thumbnail"
+  ]
+}

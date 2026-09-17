@@ -1,0 +1,6 @@
+.git
+.gallery-staged
+node_modules
+dist
+assets/screenshots
+tools/gallery/locked
