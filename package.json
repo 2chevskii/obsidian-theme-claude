@@ -1,6 +1,6 @@
 {
   "name": "obsidian-theme-claude-md",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Claude.md, an unofficial Claude-inspired theme for Obsidian.",
   "type": "module",

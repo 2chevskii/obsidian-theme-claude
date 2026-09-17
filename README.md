@@ -53,6 +53,10 @@ community plugin. Open its settings and find **Claude.md** to:
 - Automatically hide the status bar until you hover near the bottom center of the window.
 - Hide the Obsidian Sync status item.
 
+For a more polished Claude.md experience, install the
+[Claude.md Theme Companion](https://github.com/2chevskii/obsidian-plugin-theme-claudemd-companion)
+plugin.
+
 ## Contribute
 
 Found something that looks off? [Open an issue](https://github.com/2chevskii/obsidian-theme-claudemd/issues)
